@@ -25,21 +25,18 @@
 
   </head>
 
-<body ng-controller="routeCtrl">
+<body>
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			
 			<a class="brand" href="index.html">
 				Tucson Neighborhood Food Pantry				
 			</a>		
-			
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
 					<li class="dropdown">						
@@ -49,7 +46,6 @@
 							<b class="caret"></b>
 						</a>						
 					</li>
-			
 					<li class="dropdown">						
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-user"></i> 
@@ -58,21 +54,48 @@
 						</a>						
 					</li>
 				</ul>
-				
 			</div><!--/.nav-collapse -->	
-	
 		</div> <!-- /container -->
-		
 	</div> <!-- /navbar-inner -->
-	
 </div> <!-- /navbar -->
-    
-							
-							
+<div class="subnavbar">
+	<div class="subnavbar-inner">
+		<div class="container">
+			<ul class="mainnav" ng-controller="navCtrl">
+				<li ng-class="navClass('search')">
+					<a href="#/search">
+						<i class="icon-dashboard"></i>
+						<span>Dashboard</span>
+					</a>	    				
+				</li>
+				<li ng-class="navClass('add')">
+					<a href="#/add">
+						<i class="icon-user"></i>
+						<span>Add Client</span>
+					</a>	    				
+				</li>
+				<li>
+					<a href="#">
+						<i class="icon-list-alt"></i>
+						<span>Reports</span>
+					</a>    				
+				</li>		
+			</ul>
+		</div> <!-- /container -->
+	</div> <!-- /subnavbar-inner -->
+</div> <!-- /subnavbar --> 
+<div class="main">
+	<div class="main-inner">
+	    <div class="container">
+	      <div class="row">
+	      	<div class="span12">
 				<!-- ng view directive -->
-
 				<div ng-view=""></div>
-
+		    </div> <!-- /span12 -->     	
+	      </div> <!-- /row -->
+	    </div> <!-- /container -->
+	</div> <!-- /main-inner -->
+</div> <!-- /main -->
     
 <div class="footer">
 	<div class="footer-inner">
@@ -105,26 +128,43 @@ var pantryApp = angular.module('pantryApp', ['ngRoute']);
 
 pantryApp.config(function ($routeProvider){ 
 	$routeProvider
-		.when('/',    
+		.when('/search',    
 			{	
-				controller: 'routeCtrl',
+				controller: 'navCtrl',
 				templateUrl: 'partials/searchclient.html'
 			})
 		.when('/add',
 			{
-				controller: 'routeCtrl',
+				controller: 'navCtrl',
 				templateUrl: 'partials/addclient.html'
 			})
-		.otherwise({ redirectTo: '/' });  
+		.otherwise({ redirectTo: '/search' });  
 });
 
-pantryApp.controller('routeCtrl', function ($scope){ 
+pantryApp.controller('searchClient', function ($scope){ 
 	$scope.customers = [
 		{ name: 'Dave Jones', city: 'Phoenix' },
 		{ name: 'Jamie Riley', city: 'Atlanta' },
 		{ name: 'Heedy Wahlin', city: 'Chandler' },
 		{ name: 'Thomas Winter', city: 'Seattle' }
 	];
+	console.log($scope);
 });
 
+pantryApp.controller('addClient', function ($scope){ 
+	$scope.customers = [
+		{ name: 'Dave Jones', city: 'Phoenix' },
+		{ name: 'Jamie Riley', city: 'Atlanta' },
+		{ name: 'Heedy Wahlin', city: 'Chandler' },
+		{ name: 'Thomas Winter', city: 'Seattle' }
+	];
+	console.log($scope);
+});
+
+pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
+    $scope.navClass = function (page) {
+        var currentRoute = $location.path().substring(1) || 'home';
+        return page === currentRoute ? 'active' : '';
+    };  
+}]);
 </script>

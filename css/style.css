@@ -1,10 +1,4 @@
 /*------------------------------------------------------------------
-Bootstrap Admin Template by EGrappler.com
-------------------------------------------------------------------*/
-
-
-
-/*------------------------------------------------------------------
 [1. Global]
 */
 
@@ -49,18 +43,10 @@ textarea {
 	background:linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
-	
 	font-size: 10px;
 	color: #444;
 	text-transform: uppercase;
 }
-
-
-
-
-
-
-
 /*------------------------------------------------------------------
 [2. Navbar / .navbar]
 */
@@ -71,9 +57,7 @@ textarea {
 
 .navbar-inner {
 	padding: 7px 0;
-	
 	background: #00ba8b !important;
-	
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
@@ -110,7 +94,6 @@ textarea {
 
 .navbar-search .search-query { background:#008866; border:0; color:#fff; line-height:normal;}
 
-
 /*------------------------------------------------------------------
 [3. Subnavbar / .subnavbar]
 */
@@ -127,35 +110,26 @@ textarea {
 
 .subnavbar .container > ul {
 	display: inline-block;
-	
 	height: 80px;
 	padding: 0;
 	margin: 0;
-	
 }
 
 .subnavbar .container > ul > li {
 	float: left;
-	
 	min-width: 90px;
 	height: 60px;
 	padding: 0;
 	margin: 0;
-	
 	text-align: center;
 	list-style: none;
-	
 	border-left: 1px solid #d9d9d9;
-	
-	
 }
 
 .subnavbar .container > ul > li > a {
 	display: block;
-	
 	height: 100%;
 	padding: 0 15px;
-	
 	font-size: 12px;
 	font-weight: bold;
 	color: #b2afaa;
@@ -168,7 +142,6 @@ textarea {
 
 .subnavbar .container > ul > li > a > i {
 	display: inline-block;
-	
 	width: 24px;
 	height: 24px;
 	margin-top: 11px;
@@ -178,34 +151,27 @@ textarea {
 
 .subnavbar .container > ul > li > a > span {
 	display: block;
-	
 }
 
 
 .subnavbar .container > ul > li.active > a {
-	
 	border-bottom:3px solid #ff7f74;
 	color: #383838;
-}
-    
+} 
 
 .subnavbar .dropdown .dropdown-menu a {
 	font-size: 12px;
 }
-
-    
+  
 .subnavbar .dropdown .dropdown-menu {
     	text-align: left;
-    	
 		-webkit-border-top-left-radius: 0;
 		-webkit-border-top-right-radius: 0;
 		-moz-border-radius-topleft: 0;
 		-moz-border-radius-topright: 0;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
-    }
-    
-    
+}   
     
 .subnavbar .dropdown-menu::before {
 	content: '';
@@ -230,10 +196,8 @@ textarea {
 	left: 10px;
 }
 
-
 .subnavbar .caret {
 	margin-top: 4px;
-	
 	border-top-color: white;
 	border-bottom-color: white;
 }
@@ -242,28 +206,20 @@ textarea {
 	display: none;
 }
 
-
-
-
-
 /*------------------------------------------------------------------
 [4. Main / .main]
 */
 
 .main {
 	padding-bottom: 2em;
-	
 	border-bottom: 1px solid #000;
 }
-
-
 
 /*------------------------------------------------------------------
 [5. Extra / .extra]
 */
 
 .extra {
-
 	border-top: 1px solid #585858;
 	border-bottom: 1px solid #000;
 
@@ -1130,8 +1086,6 @@ color: #333;
 .ML0 { margin-left:0}
 .MR0 { margin-right:0;}
 
-
-
 /*------------------------------------------------------------------
 [1. Max Width: 480px]
 */
@@ -1143,10 +1097,6 @@ color: #333;
 	}
 	
 }
-
-
-
-
 
 /*------------------------------------------------------------------
 [1. Max Width: 767px]
@@ -1185,9 +1135,7 @@ color: #333;
 		
 		border: none;
 	}
-	
-    
-    
+	   
     .subnavbar .container > ul > li.active > a {
 		font-size: 11px;
     	background: transparent;
@@ -1198,8 +1146,7 @@ color: #333;
 		margin-bottom: 0;
 		
 		font-size: 20px;
-	}
-	
+	}	
 	
 	.subnavbar-open-right .dropdown-menu {
 		left: auto;
@@ -1243,11 +1190,6 @@ color: #333;
 	}
 
 }
-    
-
-
-
-
 /*------------------------------------------------------------------
 [3. Max Width: 979px]
 */
@@ -1267,12 +1209,6 @@ color: #333;
 		width: auto;
 	}
 }
-
-
-
-
-
-
 /*------------------------------------------------------------------
 [2. Max Width: 1200px]
 */
@@ -1281,6 +1217,8 @@ color: #333;
 	.navbar .search-query {
 		width: 200px;
 	}
-	
 }
-
+/* Center elements */
+table tr td.centerText {
+	text-align:center;
+}

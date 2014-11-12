@@ -42,7 +42,7 @@
 					<li class="dropdown">						
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-cog"></i>
-							Account
+								Account
 							<b class="caret"></b>
 						</a>						
 					</li>
@@ -84,7 +84,8 @@
 		</div> <!-- /container -->
 	</div> <!-- /subnavbar-inner -->
 </div> <!-- /subnavbar --> 
-<div class="main">
+
+<div class="main" ng-controller="mainController">
 	<div class="main-inner">
 	    <div class="container">
 	      <div class="row">
@@ -109,7 +110,6 @@
 	</div> <!-- /footer-inner -->
 </div> <!-- /footer -->
     
-
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -121,7 +121,6 @@
 	<script src="js/angular-route.min.js"></script>
 
   </body>
-
 </html>
 <script>
 var pantryApp = angular.module('pantryApp', ['ngRoute']);
@@ -141,30 +140,49 @@ pantryApp.config(function ($routeProvider){
 		.otherwise({ redirectTo: '/search' });  
 });
 
-pantryApp.controller('searchClient', function ($scope){ 
-	$scope.customers = [
-		{ name: 'Dave Jones', city: 'Phoenix' },
-		{ name: 'Jamie Riley', city: 'Atlanta' },
-		{ name: 'Heedy Wahlin', city: 'Chandler' },
-		{ name: 'Thomas Winter', city: 'Seattle' }
-	];
-	console.log($scope);
-});
+pantryApp.controller('mainController', function ($scope, $http){
+	var urlSelect = 'php/select.php';
+	var urlSearch = 'php/search.php';
 
-pantryApp.controller('addClient', function ($scope){ 
-	$scope.customers = [
-		{ name: 'Dave Jones', city: 'Phoenix' },
-		{ name: 'Jamie Riley', city: 'Atlanta' },
-		{ name: 'Heedy Wahlin', city: 'Chandler' },
-		{ name: 'Thomas Winter', city: 'Seattle' }
-	];
-	console.log($scope);
+	$scope.select = function(){
+		$http.get(urlSelect)
+			.success(function(data){
+			
+				if(data.clients){ 
+					$scope.clients = data.clients;			
+				}
+								
+			})
+			.error(function(data, status, headers, config){
+				throw new Error('Something went wrong with selecting records');
+			})
+	};
+//	$scope.select();
+console.log($scope);
+	$scope.search = function(){ 
+		// $http.post(urlSearch, { "data" : $scope.clientID})
+		$http.post(urlSearch, { "data" : 11})
+			.success(function(data, status) {
+				$scope.status = status;
+				$scope.data = data;
+				
+				console.log('status ', $scope.status, 'data ', $scope.data);
+				//$scope.result = data; // Show result from server in our <pre></pre> element
+			})
+			
+			.error(function(data, status) {
+				$scope.data = data || "Request failed";
+				$scope.status = status;			
+			});
+	};
+
 });
 
 pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
     $scope.navClass = function (page) {
-        var currentRoute = $location.path().substring(1) || 'home';
+        var currentRoute = $location.path().substring(1) || 'search';
         return page === currentRoute ? 'active' : '';
     };  
 }]);
+
 </script>

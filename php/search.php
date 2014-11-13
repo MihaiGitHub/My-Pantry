@@ -1,24 +1,18 @@
 <?php
-include 'dbconnect.php';
-
-$data = file_get_contents("php://input");
-
-$objData = json_decode($data);
-
-echo $objData->data;
-/*
-$sql = 'SELECT id, fname, lname, address FROM clients WHERE id LIKE ';
-
-$result = $objDb->query($sql);
-
-if(!$result){
-	throw new PDOException('The result returned no object');
+if(empty($_POST['id'])){
+	throw new PDOException('Empty ID');
+} else {
+	$id = $_POST['id'];
 }
 
-$result->setFetchMode(PDO::FETCH_ASSOC); // returns the data as objects
-$clients = $result->fetchAll();
+include 'dbconnect.php';
+
+$stmt = $objDb->prepare('SELECT id, fname, lname, address FROM clients WHERE id LIKE :id');
+$result = $stmt->execute(array('id' => '%'.$id.'%'));
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+$row = $stmt->fetchAll();	
 
 echo json_encode(array(
 	'error' => false,
-	'clients' => $objData->data
-), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);*/
+	'clients' => $row
+), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);

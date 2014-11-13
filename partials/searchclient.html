@@ -1,3 +1,4 @@
+<div ng-controller="searchController">
 <div class="widget widget-nopad">
 	<div class="widget">
 		<div class="widget-header"> <i class="icon-search"></i>
@@ -11,10 +12,10 @@
 					<br/>
 					
 					<div class="control-group">											
-						<label class="control-label" for="firstname">Client ID#</label>
+						<label class="control-label" for="clientID">Client ID#</label>
 						<div class="controls">
 							<select><option>Contains</option><option>Starts With</option></select>
-							<input type="text" class="span2" id="firstname" ng-model="clientID">
+							<input type="text" class="span2" id="clientID" ng-model="clientID">
 						</div> <!-- /controls -->				
 					</div> <!-- /control-group -->
 					
@@ -76,4 +77,5 @@
 	  </table>
 	</div>
 	<!-- /widget-content --> 
-</div>							
+</div>	
+</div>						

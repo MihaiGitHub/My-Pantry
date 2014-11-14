@@ -16,14 +16,13 @@ pantryApp.config(function ($routeProvider){
 			})
 		.otherwise({ redirectTo: '/search' });  
 });
+
 pantryApp.controller('searchController', function ($scope, $http){ 
 	var urlSearch = 'php/search.php';	
 	
 	$scope.search = function(){ 
 		var id = "id=" + $scope.clientID;
-		
-		console.log('clientID: ', id);
-		
+				
 		$http({
 			method: 'POST',
 			url: urlSearch,
@@ -35,14 +34,6 @@ pantryApp.controller('searchController', function ($scope, $http){
 			if(data.clients){ 
 				$scope.clients = data.clients;			
 			}
-			console.log(data);
-			/*
-			$scope.status = status;
-			$scope.data = data;
-			
-			//console.log('status ', $scope.status, 'data ', $scope.data);
-			//$scope.result = data; // Show result from server in our <pre></pre> element
-			*/
 		})
 		
 		.error(function(data, status) {
@@ -52,55 +43,51 @@ pantryApp.controller('searchController', function ($scope, $http){
 
 	};
 });
-/*
-pantryApp.controller('mainController', function ($scope, $http){ 
-	var urlSelect = 'php/select.php';
-	var urlSearch = 'php/search.php';	
 
-	$scope.select = function(){
-		$http.get(urlSelect)
-			.success(function(data){
+pantryApp.controller('insertController', function ($scope, $http){ 
+	var urlInsert = 'php/insert.php';	
+	
+	$scope.insert = function(){ 
+		var thisData = "id=" + $scope.clientID;
+		thisData += "&fname=" + $scope.fname;
+		thisData += "&lname=" + $scope.lname;
+		thisData += "&address=" + $scope.address;
+		thisData += "&city=" + $scope.city;
+		thisData += "&state=" + $scope.state;
+		thisData += "&postalCode=" + $scope.postalCode;
+		thisData += "&phone=" + $scope.phone;
+		thisData += "&email=" + $scope.email;
+		thisData += "&howManyInHouse=" + $scope.howManyInHouse;
+		thisData += "&howManyMales=" + $scope.howManyMales;
+		thisData += "&howManyFemales=" + $scope.howManyFemales;
+		thisData += "&ageGroups=" + $scope.ageGroups;
+		thisData += "&clientNotes=" + $scope.clientNotes;
 			
-				if(data.clients){ 
-					$scope.clients = data.clients;			
-				}
-								
-			})
-			.error(function(data, status, headers, config){
-				throw new Error('Something went wrong with selecting records');
-			})
-	};
-//	$scope.select();
-	$scope.search = function(){ 
-		var id = "id=" + $scope.client;
-		
-		console.log('clientID: ', id);
-		
+console.log($scope);
+			
 		$http({
 			method: 'POST',
-			url: urlSearch,
-			data: id,
+			url: urlInsert,
+			data: thisData,
 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 		})
 		
 		.success(function(data, status) {
-			$scope.status = status;
-			$scope.data = data;
-			console.log($scope);
-			//console.log('status ', $scope.status, 'data ', $scope.data);
-			//$scope.result = data; // Show result from server in our <pre></pre> element
+			if(data.clients){ 
+				$scope.clients = data.clients;			
+			}
+			
+		//	console.log('status ', $scope.status, 'data ', $scope.data);
 		})
 		
 		.error(function(data, status) {
 			$scope.data = data || "Request failed";
 			$scope.status = status;			
 		});	
-	
 
 	};
-
 });
-*/
+
 pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
     $scope.navClass = function (page) {
         var currentRoute = $location.path().substring(1) || 'search';

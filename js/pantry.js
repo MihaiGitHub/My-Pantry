@@ -62,7 +62,11 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		thisData += "&howManyFemales=" + $scope.howManyFemales;
 		thisData += "&ageGroups=" + $scope.ageGroups;
 		thisData += "&clientNotes=" + $scope.clientNotes;
-						
+		
+		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
+		thisData += "&program=" + $scope.program;
+		thisData += "&volunteer=" + $scope.volunteer;
+										
 		$http({
 			method: 'POST',
 			url: urlInsert,
@@ -71,9 +75,12 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		})
 		
 		.success(function(data, status) {
+			/*
 			if(data.clients){ 
 				$scope.clients = data.clients;			
 			}
+			*/
+			$location.path('/search');
 		})
 		
 		.error(function(data, status) {

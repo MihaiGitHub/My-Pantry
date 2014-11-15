@@ -2,8 +2,6 @@
 try {
 	if(empty($_POST['id']) || empty($_POST['fname']) || empty($_POST['lname'])){
 		throw new PDOException('Invalid request');
-	} else {
-		$id = $_POST['id'];
 	}
 
 	include 'dbconnect.php';

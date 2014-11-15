@@ -7,7 +7,7 @@ if(empty($_POST['id'])){
 
 include 'dbconnect.php';
 
-$stmt = $objDb->prepare('SELECT id, fname, lname, address FROM clients WHERE id LIKE :id');
+$stmt = $objDb->prepare('SELECT id, fname, lname, address, phone, inhouse FROM clients WHERE id LIKE :id');
 $result = $stmt->execute(array('id' => '%'.$id.'%'));
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $row = $stmt->fetchAll();	

@@ -44,7 +44,7 @@ pantryApp.controller('searchController', function ($scope, $http){
 	};
 });
 
-pantryApp.controller('insertController', function ($scope, $http){ 
+pantryApp.controller('insertController', function ($scope, $http, $location){ 
 	var urlInsert = 'php/insert.php';	
 	
 	$scope.insert = function(){ 
@@ -62,9 +62,7 @@ pantryApp.controller('insertController', function ($scope, $http){
 		thisData += "&howManyFemales=" + $scope.howManyFemales;
 		thisData += "&ageGroups=" + $scope.ageGroups;
 		thisData += "&clientNotes=" + $scope.clientNotes;
-			
-console.log($scope);
-			
+						
 		$http({
 			method: 'POST',
 			url: urlInsert,
@@ -76,8 +74,6 @@ console.log($scope);
 			if(data.clients){ 
 				$scope.clients = data.clients;			
 			}
-			
-		//	console.log('status ', $scope.status, 'data ', $scope.data);
 		})
 		
 		.error(function(data, status) {

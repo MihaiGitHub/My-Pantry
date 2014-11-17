@@ -103,12 +103,14 @@ pantryApp.controller('searchController', function ($scope, $http){
 	var urlSearch = 'php/search.php';	
 	
 	$scope.search = function(){ 
-		var id = "id=" + $scope.clientID;
+		var thisData = "id=" + $scope.clientID;
+		thisData += "&fname=" + $scope.fname;
+		thisData += "&lname=" + $scope.lname;
 				
 		$http({
 			method: 'POST',
 			url: urlSearch,
-			data: id,
+			data: thisData,
 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 		})
 		

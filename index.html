@@ -26,7 +26,7 @@
   </head>
 
 <body>
-<div class="navbar navbar-fixed-top">
+<div ng-controller="logoutController" class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -37,20 +37,19 @@
 			<a class="brand" href="index.html">
 				Tucson Neighborhood Food Pantry				
 			</a>		
-			<div class="nav-collapse">
+			<div class="nav-collapse" ng-show="!isActive('/login')">
 				<ul class="nav pull-right">
 					<li class="dropdown">						
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<a href="#" class="dropdown-toggle">
 							<i class="icon-cog"></i>
 								Account
-							<b class="caret"></b>
+							
 						</a>						
 					</li>
 					<li class="dropdown">						
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-user"></i> 
-								Logout
-							<b class="caret"></b>
+						<a href="" class="dropdown-toggle" ng-click="logout()">
+							<i class="icon-user"></i>
+							Logout
 						</a>						
 					</li>
 				</ul>
@@ -58,10 +57,10 @@
 		</div> <!-- /container -->
 	</div> <!-- /navbar-inner -->
 </div> <!-- /navbar -->
-<div class="subnavbar">
+<div ng-controller="navCtrl" class="subnavbar" ng-show="!isActive('/login')">
 	<div class="subnavbar-inner">
 		<div class="container">
-			<ul class="mainnav" ng-controller="navCtrl">
+			<ul class="mainnav">
 				<li ng-class="navClass('search')">
 					<a href="#/search">
 						<i class="icon-dashboard"></i>
@@ -98,7 +97,7 @@
 	</div> <!-- /main-inner -->
 </div> <!-- /main -->
     
-<div class="footer">
+<div ng-controller="loginCtrl" class="footer" ng-show="!isActive('/login')">
 	<div class="footer-inner">
 		<div class="container">
 			<div class="row">

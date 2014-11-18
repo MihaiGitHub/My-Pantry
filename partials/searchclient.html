@@ -79,7 +79,8 @@
 			<td>{{ client.address }}</td>
 			<td>{{ client.phone }}</td>
 			<td>{{ client.inhouse }}</td>
-			<td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+
+			<td class="td-actions"><a ng-href="#/edit" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
 		  </tr>	
 		  <tr ng-show="!clients.length"><td colspan="7" class="centerText">No records found</td></tr>
 		</tbody>

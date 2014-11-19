@@ -20,18 +20,6 @@ try {
 		}
 	}
 
-	
-	/*
-	$id = $objDb->lastInsertId();
-	
-	$stmt = $objDb->prepare('SELECT * FROM clients WHERE id = :id');
-	if(!$stmt->execute(array('id' => $id))){
-		throw new PDOException('The result returned no object');
-	}
-	
-	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$client = $stmt->fetch();
-*/
 	echo json_encode(array(
 		'error' => false,
 		'fname' => $_POST['fname'],

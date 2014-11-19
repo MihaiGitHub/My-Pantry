@@ -7,7 +7,7 @@ pantryApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'});
   $routeProvider.when('/search', {templateUrl: 'partials/searchclient.html', controller: 'navCtrl'});
   $routeProvider.when('/add', {templateUrl: 'partials/addclient.html'});
-  $routeProvider.when('/edit', {templateUrl: 'partials/editclient.html'});
+  $routeProvider.when('/edit/:id', {templateUrl: 'partials/editclient.html'});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
 
@@ -23,7 +23,6 @@ pantryApp.run(function($rootScope, $location, loginService){
 			});
 		}
 	});
-	
 });
 /***********************CONTROLLERS***************/
 pantryApp.controller('logoutController', ['$scope','$location','loginService', function($scope,$location,loginService){
@@ -38,7 +37,8 @@ pantryApp.controller('logoutController', ['$scope','$location','loginService', f
         return viewLocation === $location.path();
     };
 	
-}])
+}]);
+
 pantryApp.controller('loginCtrl', ['$scope','$location','loginService', function ($scope,$location,loginService) {
 	
 	$scope.login=function(data){
@@ -50,36 +50,75 @@ pantryApp.controller('loginCtrl', ['$scope','$location','loginService', function
     };
 	
 }]);
-pantryApp.controller('editController', function ($scope, $http){ 
-	var urlSearch = 'php/edit.php';	
-	$scope.clientID = '1234';
+
+pantryApp.controller('editController', function ($scope, $http, $routeParams){ 
+	var urlEdit = 'php/edit.php';	
+	var urlUpdate = 'php/update.php';	
 	
-	/*
-	$scope.edit = function(){ 
+	var id = "id=" + $routeParams.id;
+			
+	$http({
+		method: 'POST',
+		url: urlEdit,
+		data: id,
+		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+	})
+	
+	.success(function(data, status) {
+		
+		if(data.client){ 
+			$scope.fname = data.client.fname;
+			$scope.lname = data.client.lname;
+			$scope.address = data.client.address;	
+			$scope.phone = data.client.phone;
+			$scope.email = data.client.email;
+		}
+		
+	})
+	
+	.error(function(data, status) {
+		$scope.data = data || "Request failed";
+		$scope.status = status;			
+	});	
+
+
+	$scope.update = function(){
+		//console.log($scope);
 		var thisData = "id=" + $scope.clientID;
 		thisData += "&fname=" + $scope.fname;
 		thisData += "&lname=" + $scope.lname;
-				
+		thisData += "&address=" + $scope.address;
+		thisData += "&phone=" + $scope.phone;
+		thisData += "&email=" + $scope.email;
+		
 		$http({
 			method: 'POST',
-			url: urlSearch,
+			url: urlUpdate,
 			data: thisData,
 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 		})
 		
 		.success(function(data, status) {
-			if(data.clients){ 
-				$scope.clients = data.clients;			
+			console.log(data);
+			/*
+			if(data.client){ 
+				$scope.fname = data.client.fname;
+				$scope.lname = data.client.lname;
+				$scope.address = data.client.address;	
+				$scope.phone = data.client.phone;
+				$scope.email = data.client.email;
 			}
+			*/
+			
 		})
 		
 		.error(function(data, status) {
 			$scope.data = data || "Request failed";
 			$scope.status = status;			
 		});	
-
+	
 	};
-	*/
+
 });
 
 pantryApp.controller('searchController', function ($scope, $http){ 

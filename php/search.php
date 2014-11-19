@@ -1,15 +1,13 @@
 <?php
 try {
 
-	if(!isset($_POST['id']) && !isset($_POST['fname']) && !isset($_POST['lname'])){
+	if(($_POST['id'] == 'undefined') && ($_POST['fname'] == 'undefined') && ($_POST['lname'] == 'undefined')){
 		throw new PDOException('Empty data');
 	} 
 
 	include 'dbconnect.php';
 	
-	$flag = 0;
-	
-	
+	$flag = 0;	
 	$sql = 'SELECT id, fname, lname, address, phone, inhouse FROM clients WHERE ';
 	
 	$values = array();
@@ -37,12 +35,6 @@ try {
 		$values['lname'] = '%'.$_POST['lname'].'%';
 	}
 	
-/*	
-	$sql .= ($_POST['id'] == '') ? "" : "id = :id ";
-	$sql .= ($_POST['fname'] == '') ? "" : " AND fname = :fname";
-	$sql .= ($_POST['lname'] == '') ? "" : " AND lname = :lname";
-
-*/
 	$stmt = $objDb->prepare($sql);
 	$result = $stmt->execute($values);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);

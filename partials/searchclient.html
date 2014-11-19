@@ -11,39 +11,42 @@
 				<fieldset>	
 					<br/>
 					
-					<div class="control-group">	
-						<!--<div class="alert alert-success" ng-show="clients.length">
-						  <button type="button" class="close" data-dismiss="alert">×</button>
-						  <strong>Success!</strong> has been saved.
-						</div> -->
-					
-						<label class="control-label" for="clientID">Client ID#</label>
-						<div class="controls">
-							<select><option>Contains</option><option>Starts With</option></select>
-							<input type="text" class="span2" id="clientID" ng-model="clientID">
-						</div> <!-- /controls -->				
-					</div> <!-- /control-group -->
-					
-					<div class="control-group">											
+					<div class="control-group relative">
 						<label class="control-label" for="firstname">First Name</label>
 						<div class="controls">
-							<select><option>Contains</option><option>Starts With</option></select>
+							<select class="span2"><option>Contains</option><option>Starts With</option></select>
 							<input type="text" class="span3" id="firstname" ng-model="fname">
-						</div> <!-- /controls -->				
+						</div> <!-- /controls -->
+			
+						<div class="ndColumn">															
+							<label class="control-label" for="clientID">Client ID#</label>
+							<div class="controls">
+								<select class="span2"><option>Contains</option><option>Starts With</option></select>
+								<input type="text" class="span2" id="clientID" ng-model="clientID">
+							</div> <!-- /controls -->	
+						</div>						
 					</div> <!-- /control-group -->
 					
-					<div class="control-group">											
-						<label class="control-label" for="lastname">Last Name</label>
+					<div class="control-group relative">											
+						<label class="control-label" for="lname">Last Name</label>
 						<div class="controls">
-							<select><option>Contains</option><option>Starts With</option></select>
-							<input type="text" class="span4" id="lastname" ng-model="lname">
-						</div> <!-- /controls -->				
+							<select class="span2"><option>Contains</option><option>Starts With</option></select>
+							<input type="text" class="span3" id="lname" ng-model="lname">
+						</div> <!-- /controls -->	
+											
+						<div class="ndColumn">						
+							<label class="control-label" for="address">Address</label>
+							<div class="controls">
+								<select class="span2"><option>Contains</option><option>Starts With</option></select>
+								<input type="text" class="span2" id="address" ng-model="address">
+							</div> <!-- /controls -->	
+						</div>						
 					</div> <!-- /control-group -->
 						
 					<br />
 						
 					<div class="form-actions">
-						<button type="button" class="btn btn-primary" ng-click="search()">Search</button> 
+						<button type="submit" class="btn btn-primary" ng-click="search()">Search</button> 
 						<button class="btn">Cancel</button>
 					</div> <!-- /form-actions -->
 				</fieldset>
@@ -80,7 +83,7 @@
 			<td>{{ client.phone }}</td>
 			<td>{{ client.inhouse }}</td>
 
-			<td class="td-actions"><a ng-href="#/edit" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+			<td class="td-actions"><a ng-href="#/edit/{{client.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
 		  </tr>	
 		  <tr ng-show="!clients.length"><td colspan="7" class="centerText">No records found</td></tr>
 		</tbody>

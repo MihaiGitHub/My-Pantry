@@ -6,13 +6,14 @@ try{
 
 	include 'dbconnect.php';
 
-	$stmt = $objDb->prepare('SELECT id, fname, lname, address, phone, email, inhouse, comments FROM clients WHERE id = :id');
+	$stmt = $objDb->prepare('SELECT c.id as id, c.fname as fname, c.lname as lname, c.address as address, c.phone as phone, c.email as email, c.inhouse as inhouse, c.comments, v.date_of_visit as dateOfVisit, v.program as program, v.volunteer as volunteer 
+							 FROM clients as c left join visits as v on c.id = v.client_id WHERE c.id = :id');
 	if(!$stmt->execute(array('id' => $_POST['id']))){
 		throw new PDOException('The result returned no object');
 	}
 	
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$client = $stmt->fetch();
+	$client = $stmt->fetchAll();
 
 	echo json_encode(array(
 		'error' => false,

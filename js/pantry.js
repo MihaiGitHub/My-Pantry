@@ -64,16 +64,21 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 	})
 	
-	.success(function(data, status) {
+	.success(function(data, status) { //console.log(data.client);
 		
 		if(data.client){ 
-			$scope.fname = data.client.fname;
+		
+			$scope.client = data.client;
+			/*
+			
+		//	$scope.fname = data.client.0.fname;
 			$scope.lname = data.client.lname;
 			$scope.address = data.client.address;	
 			$scope.phone = data.client.phone;
 			$scope.email = data.client.email;
+			*/
 		}
-		
+		console.log($scope.client);
 	})
 	
 	.error(function(data, status) {
@@ -99,7 +104,6 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		})
 		
 		.success(function(data, status) {
-			console.log(data);
 			/*
 			if(data.client){ 
 				$scope.fname = data.client.fname;

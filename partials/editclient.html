@@ -14,13 +14,13 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="firstname">First Name</label>
 							<div class="controls">
-								<input type="text" class="span4" id="firstname" ng-model="fname">
+								<input type="text" class="span4" id="firstname" ng-model="client[0].fname">
 							</div> <!-- /controls -->
 											
 						<div class="ndColumn">						
 							<label class="control-label" for="lastname">Last Name</label>
 						<div class="controls">
-							<input type="text" class="span4" id="lastname" ng-model="lname">
+							<input type="text" class="span4" id="lastname" ng-model="client[0].lname">
 						</div> <!-- /controls -->	
 						</div>						
 					</div> <!-- /control-group -->
@@ -28,13 +28,13 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="address">Address</label>
 							<div class="controls">
-								<input type="text" class="span4" id="address" ng-model="address">
+								<input type="text" class="span4" id="address" ng-model="client[0].address">
 							</div> <!-- /controls -->		
 
 						<div class="ndColumn">						
 							<label class="control-label" for="city">City</label>
 						<div class="controls">
-							<input type="text" class="span4" id="city" ng-model="city">
+							<input type="text" class="span4" id="city" ng-model="client[0].city">
 						</div> <!-- /controls -->			
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->
@@ -42,7 +42,7 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="state">State</label>
 						<div class="controls">
-							<select id="state" class="span4" ng-model="state">
+							<select id="state" class="span4" ng-model="client[0].state">
 								<option value="AL">Alabama</option>
 								<option value="AK">Alaska</option>
 								<option value="AZ">Arizona</option>
@@ -100,7 +100,7 @@
 						<div class="ndColumn">						
 							<label class="control-label" for="postalCode">Postal Code</label>
 							<div class="controls">
-								<input type="text" class="span4" id="postalCode" ng-model="postalCode">
+								<input type="text" class="span4" id="postalCode" ng-model="client[0].postalCode">
 							</div> <!-- /controls -->					
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->
@@ -108,13 +108,13 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="phone">Phone</label>
 						<div class="controls">
-							<input type="text" class="span4" id="phone" ng-model="phone">
+							<input type="text" class="span4" id="phone" ng-model="client[0].phone">
 						</div> <!-- /controls -->	
 
 						<div class="ndColumn">						
 							<label class="control-label" for="email">Email</label>
 							<div class="controls">
-								<input type="text" class="span4" id="email" ng-model="email">
+								<input type="text" class="span4" id="email" ng-model="client[0].email">
 							</div> <!-- /controls -->				
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->
@@ -122,13 +122,13 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="inHouse">How many in house</label>
 						<div class="controls">
-							<input type="text" class="span4" id="inHouse" ng-model="inHouse">
+							<input type="text" class="span4" id="inHouse" ng-model="client[0].inHouse">
 						</div> <!-- /controls -->	
 
 						<div class="ndColumn">						
 							<label class="control-label" for="howManyMales">How many males</label>
 							<div class="controls">
-								<input type="text" class="span4" id="howManyMales" ng-model="howManyMales">
+								<input type="text" class="span4" id="howManyMales" ng-model="client[0].howManyMales">
 							</div> <!-- /controls -->				
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->
@@ -136,13 +136,13 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="howManyFemales">How many females</label>
 						<div class="controls">
-							<input type="text" class="span4" id="howManyFemales" ng-model="howManyFemales">
+							<input type="text" class="span4" id="howManyFemales" ng-model="client[0].howManyFemales">
 						</div> <!-- /controls -->		
 
 						<div class="ndColumn">						
 							<label class="control-label" for="ageGroups">Age groups (for multiple hold ctrl)</label>
 							<div class="controls">
-								<input type="text" class="span4" id="ageGroups" ng-model="ageGroups">
+								<input type="text" class="span4" id="ageGroups" ng-model="client[0].ageGroups">
 							</div> <!-- /controls -->				
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->
@@ -150,7 +150,7 @@
 					<div class="control-group">											
 						<label class="control-label" for="comments">Client notes</label>
 						<div class="controls">
-							<textarea rows="6" class="span4" id="comments" ng-model="comments"></textarea>
+							<textarea rows="6" class="span4" id="comments" ng-model="client[0].comments"></textarea>
 						</div> <!-- /controls -->	
 					</div> <!-- /control-group -->
 					
@@ -181,13 +181,13 @@
 		  </tr>
 		</thead>
 		<tbody>
-		  <tr ng-repeat="client in clients" ng-show="clients.length">
-			<td>{{ client.id }}</td>
-			<td>{{ client.fname }}</td>
-			<td>{{ client.lname }}</td>
+		  <tr ng-repeat="visit in client" ng-show="client[0].dateOfVisit">
+			<td>{{ visit.dateOfVisit }}</td>
+			<td>{{ visit.program }}</td>
+			<td>{{ visit.volunteer }}</td>
 			<td class="td-actions"><a ng-href="#/edit/{{client.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
 		  </tr>	
-		  <tr ng-show="!clients.length"><td colspan="7" class="centerText">No records found</td></tr>
+		  <tr ng-show="!client[0].dateOfVisit"><td colspan="7" class="centerText">No records found</td></tr>
 		</tbody>
 	  </table>
 	</div>

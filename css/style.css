@@ -2,7 +2,8 @@
 [1. Global]
 */
 
-body {
+html, body {
+	height:100%;
 	background: #f9f6f1;
 	font: 13px/1.7em 'Open Sans';
 }
@@ -211,6 +212,7 @@ textarea {
 
 .main {
 	padding-bottom: 2em;
+	min-height:580px;
 }
 
 /*------------------------------------------------------------------

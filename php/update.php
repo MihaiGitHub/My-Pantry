@@ -16,10 +16,17 @@ try{
 			throw new PDOException('The execute method failed');
 		}
 		
+		$stmt = $objDb->prepare('SELECT date_of_visit as dateOfVisit, program, volunteer FROM visits WHERE client_id = :id');
+		if(!$stmt->execute(array('id' => $_POST['id']))){ 
+			throw new PDOException('The execute method failed');
+		}
+		
+		$stmt->setFetchMode(PDO::FETCH_ASSOC);
+		$row = $stmt->fetchAll();
+
 		echo json_encode(array(
 			'error' => false,
-			'fname' => $_POST['fname'],
-			'lname' => $_POST['lname']
+			'client' => $row
 		), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 		
 	} else {

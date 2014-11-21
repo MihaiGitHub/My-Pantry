@@ -67,14 +67,15 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 	.success(function(data, status) { 		
 		if(data.client){ 		
 			$scope.client = data.client;
+			$scope.visits = data.client;
 		}
+	//	console.log($scope.client);
 	})
 	
 	.error(function(data, status) {
 		$scope.data = data || "Request failed";
 		$scope.status = status;			
 	});	
-
 
 	$scope.update = function(){
 		//console.log($scope);
@@ -112,7 +113,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 	
 	};
 	
-	$scope.addVisit = function(){ console.log($scope);
+	$scope.addVisit = function(){ 
 		var thisData = id;
 		thisData += "&lname=" + $scope.client[0].lname;
 		thisData += "&fname=" + $scope.client[0].fname;
@@ -131,16 +132,13 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 		})
 		
-		.success(function(data, status) { console.log(data);
-			/*
-			if(data.client){ 
-				$scope.fname = data.client.fname;
-				$scope.lname = data.client.lname;
-				$scope.address = data.client.address;	
-				$scope.phone = data.client.phone;
-				$scope.email = data.client.email;
+		.success(function(data, status) { 
+			console.log(data);
+			if(data.client){
+				$scope.visits = data.client;
+			
 			}
-			*/
+			console.log($scope.client);
 			
 		})
 		

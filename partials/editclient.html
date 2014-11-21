@@ -165,32 +165,74 @@
 		</div>
 		<!-- /widget-content --> 
 	</div>
-<div class="widget widget-table action-table">
-	<div class="widget-header"> <i class="icon-th-list"></i>
-	  <h3>Client Visits</h3>
+	<div class="widget">
+		<div class="widget-header"> <i class="icon-plus-sign"></i>
+		  <h3>Add New Visit</h3>
+		</div>
+			
+		<!-- /widget-header -->
+		<div class="widget-content">
+			<form id="edit-profile" class="form-horizontal">
+				<fieldset>		
+					<br/>
+					<div class="control-group relative">											
+						<label class="control-label" for="dateOfVisit">Date of Visit</label>
+						<div class="controls">
+							<input type="text" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
+						</div> <!-- /controls -->
+											
+						<div class="ndColumn">						
+							<label class="control-label" for="program">Program</label>
+							<div class="controls">
+								<input type="text" class="span4" id="program" ng-model="program">
+							</div> <!-- /controls -->	
+						</div>						
+					</div> <!-- /control-group -->
+					
+					<div class="control-group relative">											
+						<label class="control-label" for="volunteer">Volunteer</label>
+						<div class="controls">
+							<input type="text" class="span4" id="volunteer" ng-model="volunteer">
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					
+					<br />
+					
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary" ng-click="addVisit()">Save</button> 
+						<button class="btn">Cancel</button>
+					</div> <!-- /form-actions -->
+				</fieldset>
+			</form>
+		</div>
+		<!-- /widget-content --> 
 	</div>
-	<!-- /widget-header -->
-	<div class="widget-content">
-	  <table class="table table-striped table-bordered">
-		<thead>
-		  <tr>
-			<th>Date of Visit</th>
-			<th>Program</th>
-			<th>Volunteer</th>
-			<th class="td-actions"> </th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <tr ng-repeat="visit in client" ng-show="client[0].dateOfVisit">
-			<td>{{ visit.dateOfVisit }}</td>
-			<td>{{ visit.program }}</td>
-			<td>{{ visit.volunteer }}</td>
-			<td class="td-actions"><a ng-href="#/edit/{{client.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-		  </tr>	
-		  <tr ng-show="!client[0].dateOfVisit"><td colspan="7" class="centerText">No records found</td></tr>
-		</tbody>
-	  </table>
-	</div>
-	<!-- /widget-content --> 
-</div>	
+	<div class="widget widget-table action-table">
+		<div class="widget-header"> <i class="icon-th-list"></i>
+		  <h3>Client Visits</h3>
+		</div>
+		<!-- /widget-header -->
+		<div class="widget-content">
+		  <table class="table table-striped table-bordered">
+			<thead>
+			  <tr>
+				<th>Date of Visit</th>
+				<th>Program</th>
+				<th>Volunteer</th>
+				<th class="td-actions"> </th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr ng-repeat="visit in client" ng-show="client[0].dateOfVisit">
+				<td>{{ visit.dateOfVisit }}</td>
+				<td>{{ visit.program }}</td>
+				<td>{{ visit.volunteer }}</td>
+				<td class="td-actions"><a ng-href="#/edit/{{client.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+			  </tr>	
+			  <tr ng-show="!client[0].dateOfVisit"><td colspan="7" class="centerText">No records found</td></tr>
+			</tbody>
+		  </table>
+		</div>
+		<!-- /widget-content --> 
+	</div>	
 </div>

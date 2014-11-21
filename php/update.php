@@ -6,17 +6,25 @@ try{
 
 	include 'dbconnect.php';
 
-	$stmt = $objDb->prepare('UPDATE clients SET fname = :fname, lname = :lname, address = :address, phone = :phone, email = :email, inhouse = :inhouse, comments = :comments WHERE id = :cid');
-	if(!$stmt->execute(array('fname' => $_POST['fname'], 'lname' => $_POST['lname'], 'address' => $_POST['address'], 'phone' => $_POST['phone'], 'email' => $_POST['email'], 'inhouse' => $_POST['inhouse'], 'comments' => $_POST['comments'], 'cid' => $_POST['id']))){
-		throw new PDOException('There was an error updating the client');
+	if($_POST['id'] != 'undefined' && $_POST['dateOfVisit'] != 'undefined' && $_POST['program'] != 'undefined' && $_POST['volunteer'] != 'undefined'){
+	
+		$stmt = $objDb->prepare('INSERT INTO visits (`date_of_visit`, `lname`, `fname`, `how_many_in_house`, `phone`, `email`, `program`, `volunteer`, `client_id`) 
+						VALUES (:dateOfVisit, :lname, :fname, :inHouse, :phone, :email, :program, :volunteer, :id)');
+		if(!$stmt->execute(array('dateOfVisit' => $_POST['dateOfVisit'], 'lname' => $_POST['lname'], 'fname' => $_POST['fname'], 'inHouse' => $_POST['inHouse'], 
+						'phone' => $_POST['phone'], 'email' => $_POST['email'], 'program' => $_POST['program'], 'volunteer' => $_POST['volunteer'], 'id' => $_POST['id']))){
+							 
+			throw new PDOException('The execute method failed');
+		}
+		
+		echo json_encode(array(
+			'error' => false,
+			'fname' => $_POST['fname'],
+			'lname' => $_POST['lname']
+		), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+		
+	} else {
+	
 	}
-	
-	echo json_encode(array(
-		'error' => false,
-		'fname' => $_POST['fname'],
-		'lname' => $_POST['lname']
-	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-	
 } catch(PDOException $e) {
 
 	echo json_encode(array(

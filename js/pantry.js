@@ -64,21 +64,10 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 	})
 	
-	.success(function(data, status) { //console.log(data.client);
-		
-		if(data.client){ 
-		
+	.success(function(data, status) { 		
+		if(data.client){ 		
 			$scope.client = data.client;
-			/*
-			
-		//	$scope.fname = data.client.0.fname;
-			$scope.lname = data.client.lname;
-			$scope.address = data.client.address;	
-			$scope.phone = data.client.phone;
-			$scope.email = data.client.email;
-			*/
 		}
-		console.log($scope.client);
 	})
 	
 	.error(function(data, status) {
@@ -104,6 +93,45 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		})
 		
 		.success(function(data, status) {
+			/*
+			if(data.client){ 
+				$scope.fname = data.client.fname;
+				$scope.lname = data.client.lname;
+				$scope.address = data.client.address;	
+				$scope.phone = data.client.phone;
+				$scope.email = data.client.email;
+			}
+			*/
+			
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+	
+	};
+	
+	$scope.addVisit = function(){ console.log($scope);
+		var thisData = id;
+		thisData += "&lname=" + $scope.client[0].lname;
+		thisData += "&fname=" + $scope.client[0].fname;
+		thisData += "&inHouse=" + $scope.client[0].inHouse;
+		thisData += "&phone=" + $scope.client[0].phone;
+		thisData += "&email=" + $scope.client[0].email;
+
+		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
+		thisData += "&program=" + $scope.program;
+		thisData += "&volunteer=" + $scope.volunteer;
+				
+		$http({
+			method: 'POST',
+			url: urlUpdate,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) { console.log(data);
 			/*
 			if(data.client){ 
 				$scope.fname = data.client.fname;
@@ -167,11 +195,11 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		thisData += "&postalCode=" + $scope.postalCode;
 		thisData += "&phone=" + $scope.phone;
 		thisData += "&email=" + $scope.email;
-		thisData += "&howManyInHouse=" + $scope.howManyInHouse;
+		thisData += "&inHouse=" + $scope.inHouse;
 		thisData += "&howManyMales=" + $scope.howManyMales;
 		thisData += "&howManyFemales=" + $scope.howManyFemales;
 		thisData += "&ageGroups=" + $scope.ageGroups;
-		thisData += "&clientNotes=" + $scope.clientNotes;
+		thisData += "&comments=" + $scope.comments;
 		
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
@@ -185,11 +213,6 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		})
 		
 		.success(function(data, status) {
-			/*
-			if(data.clients){ 
-				$scope.clients = data.clients;			
-			}
-			*/
 			$location.path('/search');
 		})
 		

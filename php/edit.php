@@ -6,8 +6,8 @@ try{
 
 	include 'dbconnect.php';
 
-	$stmt = $objDb->prepare('SELECT c.id as id, c.fname as fname, c.lname as lname, c.address as address, c.phone as phone, c.email as email, c.inhouse as inhouse, c.comments, v.date_of_visit as dateOfVisit, v.program as program, v.volunteer as volunteer 
-							 FROM clients as c left join visits as v on c.id = v.client_id WHERE c.id = :id');
+	$stmt = $objDb->prepare('SELECT c.id as id, c.fname as fname, c.lname as lname, c.address as address, c.city as city, c.state as state, c.postalCode as postalCode, c.phone as phone, c.email as email, c.inhouse as inHouse, c.howManyMales as howManyMales, c.howManyFemales as howManyFemales, c.ageGroups as ageGroups, c.comments as comments, v.date_of_visit as dateOfVisit, v.program as program, v.volunteer as volunteer 
+							 FROM clients as c LEFT JOIN visits as v ON c.id = v.client_id WHERE c.id = :id');
 	if(!$stmt->execute(array('id' => $_POST['id']))){
 		throw new PDOException('The result returned no object');
 	}

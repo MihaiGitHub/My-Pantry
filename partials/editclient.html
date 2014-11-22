@@ -122,13 +122,23 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="inHouse">How many in house</label>
 						<div class="controls">
-							<input type="text" class="span4" id="inHouse" ng-model="client[0].inHouse">
+						<select id="inHouse" class="span4" ng-model="inHouse" ng-options="c.inHouse for c in inHouse"></select>
+								<!--
+							<input type="text" class="span4" id="inHouse" ng-model="client[0].inHouse"> -->
 						</div> <!-- /controls -->	
 
 						<div class="ndColumn">						
 							<label class="control-label" for="howManyMales">How many males</label>
 							<div class="controls">
-								<input type="text" class="span4" id="howManyMales" ng-model="client[0].howManyMales">
+							<select id="howManyMales" class="span4" ng-model="howManyMales">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+							<!--
+								<input type="text" class="span4" id="howManyMales" ng-model="client[0].howManyMales"> -->
 							</div> <!-- /controls -->				
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->
@@ -136,13 +146,27 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="howManyFemales">How many females</label>
 						<div class="controls">
-							<input type="text" class="span4" id="howManyFemales" ng-model="client[0].howManyFemales">
+						<select id="howManyFemales" class="span4" ng-model="howManyFemales">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<!--
+							<input type="text" class="span4" id="howManyFemales" ng-model="client[0].howManyFemales"> -->
 						</div> <!-- /controls -->		
 
 						<div class="ndColumn">						
 							<label class="control-label" for="ageGroups">Age groups (for multiple hold ctrl)</label>
 							<div class="controls">
-								<input type="text" class="span4" id="ageGroups" ng-model="client[0].ageGroups">
+							<select id="ageGroups" class="span4" ng-model="ageGroups" multiple>
+								<option value="1-5">1 - 5</option>
+								<option value="6-11">6 - 11</option>
+								<option value="12-18">12 - 18</option>
+								<option value="19-29">19 - 29</option>
+							</select>
+							<!--	<input type="text" class="span4" id="ageGroups" ng-model="client[0].ageGroups"> -->
 							</div> <!-- /controls -->				
 						</div> <!-- /control-group -->	
 					</div> <!-- /control-group -->

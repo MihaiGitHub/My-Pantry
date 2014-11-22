@@ -1,5 +1,6 @@
 <?php
 try {
+	
 	if(empty($_POST['id']) || empty($_POST['fname']) || empty($_POST['lname'])){
 		throw new PDOException('Invalid request');
 	}
@@ -21,9 +22,7 @@ try {
 	}
 
 	echo json_encode(array(
-		'error' => false,
-		'fname' => $_POST['fname'],
-		'lname' => $_POST['lname']
+		'error' => false
 	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	
 } catch(PDOException $e) {

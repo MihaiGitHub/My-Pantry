@@ -14,10 +14,19 @@ try{
 	
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$client = $stmt->fetchAll();
+	
+	$stmt = $objDb->prepare("SELECT volunteer FROM volunteers WHERE active = 'Y'");
+	if(!$stmt->execute()){
+		throw new PDOException('The result returned no object');
+	}
+	
+	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+	$volunteers = $stmt->fetchAll();
 
 	echo json_encode(array(
 		'error' => false,
-		'client' => $client
+		'client' => $client,
+		'volunteers' => $volunteers
 	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	
 } catch(PDOException $e) {

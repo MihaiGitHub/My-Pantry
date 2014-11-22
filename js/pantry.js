@@ -56,6 +56,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 	var urlUpdate = 'php/update.php';	
 	
 	var id = "id=" + $routeParams.id;
+	
+	
 			
 	$http({
 		method: 'POST',
@@ -64,12 +66,19 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 	})
 	
-	.success(function(data, status) { 		
+	.success(function(data, status) { 	console.log(data);
+		$scope.inHouse = [
+				{ number: '1', value: '1' },
+				{ number: '2', value: '2' },
+				{ number: '3', value: '3' },
+				{ number: '4', value: '4' },
+		];
+		
 		if(data.client){ 		
 			$scope.client = data.client;
 			$scope.visits = data.client;
 		}
-	//	console.log($scope.client);
+		console.log($scope);
 	})
 	
 	.error(function(data, status) {
@@ -182,7 +191,17 @@ pantryApp.controller('searchController', function ($scope, $http){
 
 pantryApp.controller('insertController', function ($scope, $http, $location){ 
 	var urlInsert = 'php/insert.php';	
+	var urlVolunteers = 'php/volunteers.php';
 	
+	$http.get(urlVolunteers).
+	  success(function(data, status, headers, config) {
+		$scope.volunteers = data.volunteers;
+		console.log($scope);
+	  }).
+	  error(function(data, status, headers, config) {
+			$scope.data = data;
+	  });
+		
 	$scope.insert = function(){ 
 		var thisData = "id=" + $scope.clientID;
 		thisData += "&fname=" + $scope.fname;

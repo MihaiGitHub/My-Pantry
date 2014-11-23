@@ -6,7 +6,7 @@ try{
 
 	include 'dbconnect.php';
 
-	if($_POST['id'] != 'undefined' && $_POST['dateOfVisit'] != 'undefined' && $_POST['program'] != 'undefined' && $_POST['volunteer'] != 'undefined'){
+	if(isset($_POST['dateOfVisit']) && isset($_POST['program']) && isset($_POST['volunteer'])){
 	
 		$stmt = $objDb->prepare('INSERT INTO visits (`date_of_visit`, `lname`, `fname`, `how_many_in_house`, `phone`, `email`, `program`, `volunteer`, `client_id`) 
 						VALUES (:dateOfVisit, :lname, :fname, :inHouse, :phone, :email, :program, :volunteer, :id)');
@@ -31,6 +31,20 @@ try{
 		
 	} else {
 	
+		$stmt = $objDb->prepare('UPDATE clients SET fname = :fname, lname = :lname, address = :address, city = :city, state = :state, postalCode = :postalCode, phone = :phone,
+		email = :email, inhouse = :inHouse, howManyMales = :howManyMales, howManyFemales = :howManyFemales, ageGroups = :ageGroups, comments = :comments
+		WHERE id = :id');
+		if(!$stmt->execute(array('fname' => $_POST['fname'], 'lname' => $_POST['lname'], 'address' => $_POST['address'], 'city' => $_POST['city'], 'state' => $_POST['state'],
+'postalCode' => $_POST['postalCode'], 'phone' => $_POST['phone'], 'email' => $_POST['email'], 'inHouse' => $_POST['inHouse'], 'howManyMales' => $_POST['howManyMales'],
+'howManyFemales' => $_POST['howManyFemales'], 'ageGroups' => $_POST['ageGroups'], 'comments' => $_POST['comments'],	'id' => $_POST['id']))){ 
+			throw new PDOException('The execute method failed');
+		}				
+		
+		echo json_encode(array(
+			'error' => false,
+			'test' => 'passed'
+		), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+		
 	}
 } catch(PDOException $e) {
 

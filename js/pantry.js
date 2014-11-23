@@ -57,8 +57,6 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 	
 	var id = "id=" + $routeParams.id;
 	
-	
-			
 	$http({
 		method: 'POST',
 		url: urlEdit,
@@ -66,17 +64,12 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 	})
 	
-	.success(function(data, status) { 	console.log(data);
-		$scope.inHouse = [
-				{ number: '1', value: '1' },
-				{ number: '2', value: '2' },
-				{ number: '3', value: '3' },
-				{ number: '4', value: '4' },
-		];
-		
+	.success(function(data, status) { 	
 		if(data.client){ 		
-			$scope.client = data.client;
+			$scope.client = data.client;	
 			$scope.visits = data.client;
+			$scope.volunteers = data.volunteers;
+			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 		}
 		console.log($scope);
 	})
@@ -86,15 +79,23 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 		$scope.status = status;			
 	});	
 
-	$scope.update = function(){
-		//console.log($scope);
-		var thisData = "id=" + $scope.clientID;
-		thisData += "&fname=" + $scope.fname;
-		thisData += "&lname=" + $scope.lname;
-		thisData += "&address=" + $scope.address;
-		thisData += "&phone=" + $scope.phone;
-		thisData += "&email=" + $scope.email;
+	$scope.update = function(){ 
 		
+		var thisData = id;
+		thisData += "&fname=" + $scope.client[0].fname;
+		thisData += "&lname=" + $scope.client[0].lname;
+		thisData += "&address=" + $scope.client[0].address;
+		thisData += "&city=" + $scope.client[0].city;
+		thisData += "&state=" + $scope.client[0].state;
+		thisData += "&postalCode=" + $scope.client[0].postalCode;
+		thisData += "&phone=" + $scope.client[0].phone;
+		thisData += "&email=" + $scope.client[0].email;
+		thisData += "&inHouse=" + $scope.client[0].inHouse;
+		thisData += "&howManyMales=" + $scope.client[0].howManyMales;
+		thisData += "&howManyFemales=" + $scope.client[0].howManyFemales;
+		thisData += "&ageGroups=" + $scope.client[0].ageGroups;
+		thisData += "&comments=" + $scope.client[0].comments;
+				
 		$http({
 			method: 'POST',
 			url: urlUpdate,
@@ -102,7 +103,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 		})
 		
-		.success(function(data, status) {
+		.success(function(data, status) { console.log(data);
 			/*
 			if(data.client){ 
 				$scope.fname = data.client.fname;
@@ -132,8 +133,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
-		thisData += "&volunteer=" + $scope.volunteer;
-				
+		thisData += "&volunteer=" + $scope.volunteer.volunteer;
+						
 		$http({
 			method: 'POST',
 			url: urlUpdate,

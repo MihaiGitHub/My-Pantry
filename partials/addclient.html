@@ -188,7 +188,7 @@
 					<div class="control-group relative">											
 						<label class="control-label" for="dateOfVisit">Date of Visit</label>
 						<div class="controls">
-							<input type="text" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
+							<input type="text" maxlength="0" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
 						</div> <!-- /controls -->		
 					</div> <!-- /control-group -->
 					
@@ -223,3 +223,11 @@
 	</div>
 </div>
 </div>
+<script>
+  $(function() {
+    $( "#dateOfVisit" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  });
+</script>

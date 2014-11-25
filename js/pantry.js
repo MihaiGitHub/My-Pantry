@@ -71,7 +71,6 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 		}
-		console.log($scope);
 	})
 	
 	.error(function(data, status) {
@@ -221,8 +220,8 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
-		thisData += "&volunteer=" + $scope.volunteer;
-										
+		thisData += "&volunteer=" + $scope.volunteer.volunteer;
+				
 		$http({
 			method: 'POST',
 			url: urlInsert,

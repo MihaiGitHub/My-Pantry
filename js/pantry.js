@@ -51,7 +51,7 @@ pantryApp.controller('loginCtrl', ['$scope','$location','loginService', function
 	
 }]);
 
-pantryApp.controller('editController', function ($scope, $http, $routeParams){ 
+pantryApp.controller('editController', function ($scope, $http, $routeParams, $location){ 
 	var urlEdit = 'php/edit.php';	
 	var urlUpdate = 'php/update.php';	
 	
@@ -112,7 +112,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams){
 				$scope.email = data.client.email;
 			}
 			*/
-			
+			$location.path('/search');
 		})
 		
 		.error(function(data, status) {

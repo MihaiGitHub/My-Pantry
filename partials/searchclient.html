@@ -9,45 +9,29 @@
 		<div class="widget-content">
 			<form id="edit-profile" class="form-horizontal">
 				<fieldset>	
-					<br/>
 					
-					<div class="control-group relative">
-						<label class="control-label" for="firstname">First Name</label>
-						<div class="controls">
-							<select class="span2"><option>Contains</option><option>Starts With</option></select>
-							<input type="text" class="span2" id="firstname" ng-model="fname">
-						</div> <!-- /controls -->
-			
-						<div class="ndColumn">															
-							<label class="control-label" for="clientID">Client ID#</label>
-							<div class="controls">
-								<select class="span2"><option>Contains</option><option>Starts With</option></select>
-								<input type="text" class="span2" id="clientID" ng-model="clientID">
-							</div> <!-- /controls -->	
-						</div>						
-					</div> <!-- /control-group -->
-					
-					<div class="control-group relative">											
-						<label class="control-label" for="lname">Last Name</label>
-						<div class="controls">
-							<select class="span2"><option>Contains</option><option>Starts With</option></select>
-							<input type="text" class="span2" id="lname" ng-model="lname">
-						</div> <!-- /controls -->	
-											
-						<div class="ndColumn">						
-							<label class="control-label" for="address">Address</label>
-							<div class="controls">
-								<select class="span2"><option>Contains</option><option>Starts With</option></select>
-								<input type="text" class="span2" id="address" ng-model="address">
-							</div> <!-- /controls -->	
-						</div>						
+					<div class="control-group">
+						<table class="search">
+							<tr>
+								<td>First Name</td>
+								<td>Last Name</td>
+								<td>Client ID</label></td>
+							</tr>
+							<tr>
+								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
+								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
+								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
+							</tr>
+							<tr>
+								<td><input type="text" class="span3" id="firstname" ng-model="fname"></td>
+								<td><input type="text" class="span3" id="lname" ng-model="lname"></td>
+								<td><input type="text" class="span3" id="clientID" ng-model="clientID"></td>
+							</tr>
+						</table>										
 					</div> <!-- /control-group -->
 						
-					<br />
-						
-					<div class="form-actions">
+					<div class="form-actions alignRight">
 						<button type="submit" class="btn btn-primary" ng-click="search()">Search</button> 
-						<button class="btn">Cancel</button>
 					</div> <!-- /form-actions -->
 				</fieldset>
 			</form>
@@ -55,7 +39,6 @@
 		<!-- /widget-content --> 
 	</div>
 </div>	
-				
 <div class="widget widget-table action-table">
 	<div class="widget-header"> <i class="icon-th-list"></i>
 	  <h3>Clients</h3>

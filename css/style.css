@@ -1177,3 +1177,13 @@ table tr td.centerText {
 	left:600px;
 	top:0px;
 }
+/* search page */
+table tr td {
+	padding-left:15px;
+}
+.search input{
+	width:97%;
+}
+.alignRight {
+	text-align:right;
+}

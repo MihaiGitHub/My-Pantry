@@ -182,7 +182,6 @@
 					
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary" ng-click="update()">Save</button> 
-						<button class="btn">Cancel</button>
 					</div> <!-- /form-actions -->
 				</fieldset>
 			</form>
@@ -207,7 +206,7 @@
 					<div class="control-group">											
 						<label class="control-label" for="dateOfVisit">Date of Visit</label>
 						<div class="controls">
-							<input type="text" maxlength="0" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
+							<input type="text" maxlength="10" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
 						</div> <!-- /controls -->
 					</div> <!-- /control-group -->
 					
@@ -232,8 +231,7 @@
 					<br />
 					
 					<div class="form-actions">
-						<button type="submit" class="btn btn-primary" ng-click="addVisit()">Save</button> 
-						<button class="btn">Cancel</button>
+						<button type="submit" class="btn btn-primary" ng-click="addVisit()" id="button">Save</button> 
 					</div> <!-- /form-actions -->
 				</fieldset>
 			</form>
@@ -273,6 +271,7 @@
 <script>
   $(function() {
     $( "#dateOfVisit" ).datepicker({
+	  autoOpen: false,
       changeMonth: true,
       changeYear: true
     });

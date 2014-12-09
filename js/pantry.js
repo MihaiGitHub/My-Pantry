@@ -177,7 +177,7 @@ pantryApp.controller('searchController', function ($scope, $http){
 		
 		.success(function(data, status) {
 			if(data.clients){ 
-				$scope.clients = data.clients;			
+				$scope.clients = data.clients;	
 			}
 		})
 		
@@ -186,7 +186,7 @@ pantryApp.controller('searchController', function ($scope, $http){
 			$scope.status = status;			
 		});	
 
-	};
+	};	
 });
 
 pantryApp.controller('insertController', function ($scope, $http, $location){ 

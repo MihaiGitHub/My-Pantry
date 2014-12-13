@@ -142,13 +142,10 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		})
 		
 		.success(function(data, status) { 
-			console.log(data);
 			if(data.client){
 				$scope.visits = data.client;
 			
-			}
-			console.log($scope.client);
-			
+			}			
 		})
 		
 		.error(function(data, status) {
@@ -162,6 +159,58 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 
 pantryApp.controller('searchController', function ($scope, $http){ 
 	var urlSearch = 'php/search.php';	
+	var urlDelete = 'php/delete.php';	
+	
+	
+	
+	
+	//////////////////
+	/*
+	var removeByAttr = function(arr, attr, value){
+				var i = arr.length;
+				while(i--){
+				   if( arr[i] 
+					   && arr[i].hasOwnProperty(attr) 
+					   && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+					   arr.splice(i,1);
+
+				   }
+				}
+				return arr;
+			}
+			
+	removeByAttr(arr, 'id', 112317);
+	*/
+	/////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// create modal on load and hide it
+	$( ".dialog-confirm" ).dialog({
+	  autoOpen: false,
+      resizable: false,
+      height:140,
+      modal: true,
+      buttons: {
+        "Delete all items": function() { 
+		
+			var id = $(this).attr('id');
+			deleteClient(id);
+			$(this).dialog('close');		
+		
+        },
+        Cancel: function() {
+			$(this).dialog('close');
+        }
+      }
+    });
 	
 	$scope.search = function(){ 
 		var thisData = "id=" + $scope.clientID;
@@ -178,7 +227,29 @@ pantryApp.controller('searchController', function ($scope, $http){
 		.success(function(data, status) {
 			if(data.clients){ 
 				$scope.clients = data.clients;	
+				console.log($scope.clients);
 			}
+			//////////
+			/*
+			var removeByAttr = function(arr, attr, value){
+				var i = arr.length;
+				while(i--){
+				   if( arr[i] 
+					   && arr[i].hasOwnProperty(attr) 
+					   && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+					   arr.splice(i,1);
+
+				   }
+				}
+				return arr;
+			}
+			var array = $scope.clients;
+			removeByAttr(array, 'id', '112316');
+console.log(array);
+*/
+			////////////
+
 		})
 		
 		.error(function(data, status) {
@@ -187,6 +258,52 @@ pantryApp.controller('searchController', function ($scope, $http){
 		});	
 
 	};	
+	
+	$scope.deleteModal = function(){ 
+	
+		$(".table tbody").on("click", "tr .btn-danger", function(e){
+			$('.dialog-confirm').attr('id', $(this).attr('id'));
+			$('.dialog-confirm').dialog('open');
+		});
+
+	};
+	
+	var deleteClient = function (id) {
+		
+		console.log(id);
+		
+		var thisData = "id=" + id;
+				
+		$http({
+			method: 'POST',
+			url: urlDelete,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {			
+			var removeByAttr = function(arr, attr, value){
+				var i = arr.length;
+				while(i--){
+				   if( arr[i] 
+					   && arr[i].hasOwnProperty(attr) 
+					   && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+					   arr.splice(i,1);
+
+				   }
+				}
+				return arr;
+			}
+			
+			removeByAttr($scope.clients, 'id', id.toString());
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+	};
 });
 
 pantryApp.controller('insertController', function ($scope, $http, $location){ 

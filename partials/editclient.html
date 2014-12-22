@@ -254,7 +254,7 @@
 			  </tr>
 			</thead>
 			<tbody>
-			  <tr ng-repeat="visit in visits" ng-show="client[0].dateOfVisit">
+			  <tr ng-repeat="visit in visits | orderBy:'dateOfVisit':true" ng-show="client[0].dateOfVisit">
 				<td>{{ visit.dateOfVisit }}</td>
 				<td>{{ visit.program }}</td>
 				<td>{{ visit.volunteer }}</td>

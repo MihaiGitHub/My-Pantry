@@ -1182,7 +1182,10 @@ table tr td {
 	padding-left:15px;
 }
 .search input{
-	width:97%;
+	width:96%;
+}
+.search select{
+	width:215px;
 }
 .alignRight {
 	text-align:right;

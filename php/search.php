@@ -1,7 +1,7 @@
 <?php
 try {
 
-	if(($_POST['id'] == 'undefined') && ($_POST['fname'] == 'undefined') && ($_POST['lname'] == 'undefined')){
+	if(($_POST['id'] == 'undefined') && ($_POST['fname'] == 'undefined') && ($_POST['lname'] == 'undefined') && ($_POST['address'] == 'undefined') && ($_POST['phone'] == 'undefined')){
 		throw new PDOException('Empty data');
 	} 
 
@@ -33,6 +33,24 @@ try {
 			$sql .= " AND lname LIKE :lname";
 		}
 		$values['lname'] = '%'.$_POST['lname'].'%';
+	}
+	if($_POST['address'] != 'undefined'){
+		if($flag == 0){
+			$sql .= "address LIKE :address";
+			$flag = 1;
+		} else {
+			$sql .= " AND address LIKE :address";
+		}
+		$values['address'] = '%'.$_POST['address'].'%';
+	}
+	if($_POST['phone'] != 'undefined'){
+		if($flag == 0){
+			$sql .= "phone LIKE :phone";
+			$flag = 1;
+		} else {
+			$sql .= " AND phone LIKE :phone";
+		}
+		$values['phone'] = '%'.$_POST['phone'].'%';
 	}
 	
 	$stmt = $objDb->prepare($sql);

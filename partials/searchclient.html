@@ -1,4 +1,3 @@
-
 <div class="span12" ng-controller="searchController">
 <div class="widget widget-nopad">
 	<div class="widget">
@@ -13,20 +12,26 @@
 					
 					<div class="control-group">
 						<table class="search">
-							<tr>
+							<tr>								
+								<td>Client ID</td>
 								<td>First Name</td>
 								<td>Last Name</td>
-								<td>Client ID</label></td>
+								<td>Address</td>
+								<td>Phone Number</td>
 							</tr>
 							<tr>
 								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
 								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
 								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
+								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
+								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
 							</tr>
 							<tr>
+								<td><input type="text" class="span3" id="clientID" ng-model="clientID"></td>
 								<td><input type="text" class="span3" id="firstname" ng-model="fname"></td>
 								<td><input type="text" class="span3" id="lname" ng-model="lname"></td>
-								<td><input type="text" class="span3" id="clientID" ng-model="clientID"></td>
+								<td><input type="text" class="span3" id="address" ng-model="address"></td>
+								<td><input type="text" class="span3" id="phone" ng-model="phone"></td>
 							</tr>
 						</table>										
 					</div> <!-- /control-group -->

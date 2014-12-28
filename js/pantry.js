@@ -181,7 +181,9 @@ pantryApp.controller('searchController', function ($scope, $http){
 		var thisData = "id=" + $scope.clientID;
 		thisData += "&fname=" + $scope.fname;
 		thisData += "&lname=" + $scope.lname;
-				
+		thisData += "&address=" + $scope.address;
+		thisData += "&phone=" + $scope.phone;
+		
 		$http({
 			method: 'POST',
 			url: urlSearch,

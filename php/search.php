@@ -13,7 +13,13 @@ try {
 	$values = array();
 	if($_POST['id'] != 'undefined'){
 		$sql .= "id LIKE :id";
-		$values['id'] = '%'.$_POST['id'].'%';
+
+		if($_POST['idType'] == 'contains'){
+			$values['id'] = '%'.$_POST['id'].'%';
+		} else {
+			$values['id'] = $_POST['id'].'%';
+		}
+		
 		$flag = 1;
 	}
 	if($_POST['fname'] != 'undefined'){
@@ -23,7 +29,12 @@ try {
 		} else {
 			$sql .= " AND fname LIKE :fname";
 		}
-		$values['fname'] = '%'.$_POST['fname'].'%';
+		
+		if($_POST['fnameType'] == 'contains'){
+			$values['fname'] = '%'.$_POST['fname'].'%';
+		} else {
+			$values['fname'] = $_POST['fname'].'%';
+		}
 	}
 	if($_POST['lname'] != 'undefined'){
 		if($flag == 0){
@@ -32,7 +43,12 @@ try {
 		} else {
 			$sql .= " AND lname LIKE :lname";
 		}
-		$values['lname'] = '%'.$_POST['lname'].'%';
+		
+		if($_POST['lnameType'] == 'contains'){
+			$values['lname'] = '%'.$_POST['lname'].'%';
+		} else {
+			$values['lname'] = $_POST['lname'].'%';
+		}
 	}
 	if($_POST['address'] != 'undefined'){
 		if($flag == 0){
@@ -41,7 +57,12 @@ try {
 		} else {
 			$sql .= " AND address LIKE :address";
 		}
-		$values['address'] = '%'.$_POST['address'].'%';
+		
+		if($_POST['address'] == 'contains'){
+			$values['address'] = '%'.$_POST['address'].'%';
+		} else {
+			$values['address'] = $_POST['address'].'%';
+		}
 	}
 	if($_POST['phone'] != 'undefined'){
 		if($flag == 0){
@@ -50,7 +71,12 @@ try {
 		} else {
 			$sql .= " AND phone LIKE :phone";
 		}
-		$values['phone'] = '%'.$_POST['phone'].'%';
+		
+		if($_POST['phone'] == 'contains'){
+			$values['phone'] = '%'.$_POST['phone'].'%';
+		} else {
+			$values['phone'] = $_POST['phone'].'%';
+		}
 	}
 	
 	$stmt = $objDb->prepare($sql);

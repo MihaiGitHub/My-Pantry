@@ -20,11 +20,11 @@
 								<td>Phone Number</td>
 							</tr>
 							<tr>
-								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
-								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
-								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
-								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
-								<td><select class="span4"><option>Contains</option><option>Starts With</option></select></td>
+								<td><select ng-model='form.idType' ng-options='option.value as option.name for option in typeOptions'></select></td>
+								<td><select ng-model='form.fnameType' ng-options='option.value as option.name for option in typeOptions'></select>								
+								<td><select ng-model='form.lnameType' ng-options='option.value as option.name for option in typeOptions'></select>								
+								<td><select ng-model='form.addressType' ng-options='option.value as option.name for option in typeOptions'></select>								
+								<td><select ng-model='form.phoneType' ng-options='option.value as option.name for option in typeOptions'></select>								
 							</tr>
 							<tr>
 								<td><input type="text" class="span3" id="clientID" ng-model="clientID"></td>

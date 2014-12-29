@@ -157,6 +157,14 @@ pantryApp.controller('searchController', function ($scope, $http){
 	var urlSearch = 'php/search.php';	
 	var urlDelete = 'php/delete.php';	
 	
+	$scope.typeOptions = [
+		{ name: 'Contains', value: 'contains' }, 
+		{ name: 'Starts With', value: 'startsWith' }
+    ];
+    
+    $scope.form = {idType : $scope.typeOptions[0].value, fnameType : $scope.typeOptions[0].value, lnameType : $scope.typeOptions[0].value, 
+					addressType : $scope.typeOptions[0].value, phoneType : $scope.typeOptions[0].value};
+	
 	// create modal on load and hide it
 	$( ".dialog-confirm" ).dialog({
 	  autoOpen: false,
@@ -179,10 +187,15 @@ pantryApp.controller('searchController', function ($scope, $http){
 	
 	$scope.search = function(){ 
 		var thisData = "id=" + $scope.clientID;
+		thisData += "&idType=" + $scope.form.idType;
 		thisData += "&fname=" + $scope.fname;
+		thisData += "&fnameType=" + $scope.form.fnameType;
 		thisData += "&lname=" + $scope.lname;
+		thisData += "&lnameType=" + $scope.form.lnameType;
 		thisData += "&address=" + $scope.address;
+		thisData += "&addressType=" + $scope.form.addressType;
 		thisData += "&phone=" + $scope.phone;
+		thisData += "&phoneType=" + $scope.form.phoneType;
 		
 		$http({
 			method: 'POST',

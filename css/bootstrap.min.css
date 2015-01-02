@@ -2564,7 +2564,7 @@ filter:progid:dximagetransform.microsoft.gradient(enabled=false);
 .navbar .brand {
 	float: left;
 	display: block;
-	padding: 8px 20px 12px;
+	padding: 5px 20px 5px;
 	margin-left: -20px;
 	font-size: 20px;
 	font-weight: 200;

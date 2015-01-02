@@ -57,7 +57,7 @@ textarea {
 }
 
 .navbar-inner {
-	padding: 7px 0;
+	/*padding: 7px 0;*/
 	background: #00ba8b !important;
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
@@ -74,8 +74,6 @@ textarea {
 .navbar .nav>li>a { color:#fff !important;}
 .navbar .brand {
 	font-weight: 600;
-	position: relative;
-	top: 2px;
 }
 
 .navbar .search-query {

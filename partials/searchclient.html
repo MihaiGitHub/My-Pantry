@@ -45,9 +45,96 @@
 		<!-- /widget-content --> 
 	</div>
 </div>	
+	  <!-------------------------------->
+<script type="text/javascript">
+        $(document).ready(function () {
+            window.asd = $('.SlectBox').SumoSelect({ csvDispCount: 3 });
+        
+			
+        });
+    </script>
+	  
+<!--
+	<select id="testing" multiple="multiple" placeholder="Select columns to hide" class="SlectBox">
+		<option id="clientIDoption" value="clientID">Client ID</option>
+		<option value="fname">First Name</option>
+		<option value="lname">Last Name</option>
+		<option id="addressOption" value="address">Address</option>
+		<option value="phone">Phone</option>
+	</select>
+-->
+
+
+<script>
+$(function() {
+	//$('select.SlectBox')[0].sumo.selectItem(2);
+	
+
+	$('#testing').on('click', function() { console.log('clicked');
+var sel = $('#mySelectBox option:selected');
+		$('#lnameCol').toggle();
+		console.log(sel);
+	});	
+});	
+
+
+/*
+$(function() {
+	//$('select.SlectBox')[0].sumo.selectItem(2);
+
+	$('select.SlectBox').on('change', function() {
+
+		$.each( $("select.SlectBox")[0].sumo.select.context.selectedOptions, function( key, value ) {
+		
+			//console.log($("select.SlectBox")[0].sumo.select.context.selectedOptions[key].text);
+
+		
+			if($("select.SlectBox")[0].sumo.select.context.selectedOptions[key].text == 'Last Name'){ console.log('hide');
+				$('#lnameCol').hide();
+			} else { console.log('show');
+				$('#lnameCol').show();
+			}
+		});
+		
+	});	
+});	
+	*/
+	
+function clicked(value){
+	$.each( $("select.SlectBox")[0].sumo.select.context.selectedOptions, function( key, value ) {
+	
+		//console.log($("select.SlectBox")[0].sumo.select.context.selectedOptions[key].text);
+	
+		if($("select.SlectBox")[0].sumo.select.context.selectedOptions[key].text == 'Last Name'){ console.log('show');
+			$('#lnameCol').show();
+		} else { console.log('hide');
+			$('#lnameCol').hide();
+		}
+	});
+	/*
+	if($("select.SlectBox")[0].sumo.select.context.selectedOptions[0]){
+		alert($("select.SlectBox")[0].sumo.select.context.selectedOptions[0].text);
+	}
+	
+	
+	$("select.SlectBox").each(function(){
+		val.push(this.value);
+	});
+	*/
+		  
+	/*
+    $("#testing option").each(function(){
+    	console.log($(this).val());
+	});
+	*/
+}
+</script>
+	  <!-------------------------------->
+
 <div class="widget widget-table action-table">
 	<div class="widget-header"> <i class="icon-th-list"></i>
 	  <h3>Clients</h3>
+	  
 	</div>
 	<!-- /widget-header -->
 	<div class="widget-content">
@@ -55,8 +142,8 @@
 		<thead>
 		  <tr>
 			<th>Client ID#</th>
-			<th>First Name</th>
-			<th>Last Name</th>
+			<th id="fnameCol">First Name</th>
+			<th id="lnameCol">Last Name</th>
 			<th>Address</th>
 			<th>Phone</th>
 			<th># In House</th>
@@ -81,27 +168,9 @@
 		</tbody>
 	  </table>
 	</div>
-	<!-- /widget-content --> 
-	
+	<!-- /widget-content --> 	
 </div>	
 </div>	
-
-
-
-<style>
-/*
-    body { font-size: 62.5%; }
-    label, input { display:block; }
-    input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:25px; }
-    h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 350px; margin: 20px 0; }
-    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-    .ui-dialog .ui-state-error { padding: .3em; }
-    .validateTips { border: 1px solid transparent; padding: 0.3em; }
-	*/
-  </style>
 <div class="dialog-confirm" title="Delete record?">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The client will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>

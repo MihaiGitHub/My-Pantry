@@ -238,6 +238,65 @@
 		</div>
 		<!-- /widget-content --> 
 	</div>
+	<div class="widget">
+		<div class="widget-header"> <i class="icon-plus-sign"></i>
+		  <h3>Export Client Visits</h3>
+		</div>
+			<div class="widget-content">
+			<form id="edit-profile" class="form-horizontal" action="php/export.php" target="_blank">
+				<fieldset>		
+					<br/>
+					<div class="control-group">											
+						<label class="control-label" for="from">From</label>
+						<div class="controls">
+							<input type="text" maxlength="10" class="span2" id="from">
+						</div> 
+					</div> 
+					
+					<div class="control-group">											
+						<label class="control-label" for="to">To</label>
+						<div class="controls">
+							<input type="text" maxlength="10" class="span2" id="to">
+						</div> 
+					</div> 
+					
+					<br />
+					
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary" id="button">Export</button> 
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<!-- /widget-header 
+		<div class="widget-content">
+			<form id="edit-profile" class="form-horizontal">
+				<fieldset>		
+					<br/>
+					<div class="control-group">											
+						<label class="control-label" for="from">From</label>
+						<div class="controls">
+							<input type="text" maxlength="10" class="span2" id="from" ng-model="from">
+						</div> 
+					</div> 
+					
+					<div class="control-group">											
+						<label class="control-label" for="to">To</label>
+						<div class="controls">
+							<input type="text" maxlength="10" class="span2" id="to" ng-model="to">
+						</div> 
+					</div> 
+					
+					<br />
+					
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary" ng-click="exportPDF()" id="button">Export</button> 
+					</div>
+				</fieldset>
+			</form>
+		</div>-->
+		<!-- /widget-content --> 
+	</div>
 	<div class="widget widget-table action-table">
 		<div class="widget-header"> <i class="icon-th-list"></i>
 		  <h3>Client Visits</h3>
@@ -276,6 +335,18 @@
 <script>
   $(function() {
     $( "#dateOfVisit" ).datepicker({
+	  autoOpen: false,
+      changeMonth: true,
+      changeYear: true,
+	  dateFormat: 'yy-mm-dd'
+    });
+	$( "#from" ).datepicker({
+	  autoOpen: false,
+      changeMonth: true,
+      changeYear: true,
+	  dateFormat: 'yy-mm-dd'
+    });
+	$( "#to" ).datepicker({
 	  autoOpen: false,
       changeMonth: true,
       changeYear: true,

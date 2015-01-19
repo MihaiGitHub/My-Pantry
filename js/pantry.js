@@ -53,6 +53,7 @@ pantryApp.controller('loginCtrl', ['$scope','$location','loginService', function
 pantryApp.controller('editController', function ($scope, $http, $routeParams, $location){ 
 	var urlEdit = 'php/edit.php';	
 	var urlUpdate = 'php/update.php';	
+	var urlExport = 'php/export.php';	
 	
 	var id = "id=" + $routeParams.id;
 	
@@ -150,6 +151,37 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		});	
 	
 	};
+	/*
+	$scope.exportPDF = function(){ 
+		var thisData = id;
+		thisData += "&from=" + $scope.client[0].from;
+		thisData += "&to=" + $scope.client[0].to;
+						
+		$http({
+			method: 'POST',
+			url: urlExport,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) { 
+		
+		
+		console.log(data);
+		
+			if(data.client){
+				$scope.visits = data.client;
+			
+			}
+		
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+	
+	};*/	
 
 });
 

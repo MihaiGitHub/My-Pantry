@@ -56,6 +56,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 	var urlExport = 'php/export.php';	
 	
 	var id = "id=" + $routeParams.id;
+	$scope.cid = $routeParams.id;
 	
 	$http({
 		method: 'POST',
@@ -75,7 +76,6 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 			
-			console.log($scope);
 		}
 	})
 	
@@ -95,6 +95,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		thisData += "&postalCode=" + $scope.client[0].postalCode;
 		thisData += "&phone=" + $scope.client[0].phone;
 		thisData += "&email=" + $scope.client[0].email;
+		thisData += "&employed=" + $scope.client[0].employed;
+		thisData += "&lastDateWorked=" + $scope.client[0].lastDateWorked;
 		thisData += "&inHouse=" + $scope.client[0].inHouse;
 		thisData += "&howManyMales=" + $scope.client[0].howManyMales;
 		thisData += "&howManyFemales=" + $scope.client[0].howManyFemales;
@@ -129,6 +131,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
+		thisData += "&numBags=" + $scope.numBags;
 		thisData += "&volunteer=" + $scope.volunteer.volunteer;
 						
 		$http({
@@ -139,7 +142,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		})
 		
 		.success(function(data, status) { 
-			if(data.client){
+			if(data.client){ console.log(data.client);
 				$scope.visits = data.client;
 			
 			}			
@@ -316,6 +319,8 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		thisData += "&postalCode=" + $scope.postalCode;
 		thisData += "&phone=" + $scope.phone;
 		thisData += "&email=" + $scope.email;
+		thisData += "&employed=" + $scope.employed;
+		thisData += "&lastDateWorked=" + $scope.lastDateWorked;
 		thisData += "&inHouse=" + $scope.inHouse;
 		thisData += "&howManyMales=" + $scope.howManyMales;
 		thisData += "&howManyFemales=" + $scope.howManyFemales;
@@ -324,6 +329,7 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
+		thisData += "&numBags=" + $scope.numBags;
 		thisData += "&volunteer=" + $scope.volunteer.volunteer;
 				
 		$http({

@@ -121,6 +121,25 @@
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
+						<label class="control-label" for="employed">Head of household currently employed</label>
+						<div class="controls">
+							<select id="employed" class="span4" ng-model="client[0].employed">
+								<option value="yes">Yes</option>
+								<option value="no">No</option>
+							</select>
+						</div> <!-- /controls -->	
+					</div> <!-- /control-group -->
+					
+					<div class="control-group relative" id="lastDayWorkedDiv">											
+						<label class="control-label" for="lastDateWorked">Last date worked</label>
+						<div class="controls">
+							<input type="text" maxlength="0" class="span4" id="lastDateWorked" ng-model="client[0].lastDateWorked">
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					
+					
+					
+					<div class="control-group">											
 						<label class="control-label" for="inHouse">How many in house</label>
 						<div class="controls">
 							<select id="inHouse" class="span4" ng-model="client[0].inHouse">	
@@ -211,6 +230,19 @@
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
+						<label class="control-label" for="numBags">Number of bags</label>
+						<div class="controls">
+							<select id="numBags" class="span4" ng-model="numBags">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div> <!-- /controls -->
+					</div> <!-- /control-group -->
+					
+					<div class="control-group">											
 						<label class="control-label" for="program">Program</label>
 						<div class="controls">
 							<select id="program" class="span4" ng-model="program">
@@ -243,20 +275,20 @@
 		  <h3>Export Client Visits</h3>
 		</div>
 			<div class="widget-content">
-			<form id="edit-profile" class="form-horizontal" action="php/export.php" target="_blank">
+			<form method="post" id="edit-profile" class="form-horizontal" action="php/export.php" target="_blank">
 				<fieldset>		
 					<br/>
 					<div class="control-group">											
 						<label class="control-label" for="from">From</label>
 						<div class="controls">
-							<input type="text" maxlength="10" class="span2" id="from">
+							<input type="text" maxlength="10" class="span2" name="from" id="from">
 						</div> 
 					</div> 
 					
 					<div class="control-group">											
 						<label class="control-label" for="to">To</label>
 						<div class="controls">
-							<input type="text" maxlength="10" class="span2" id="to">
+							<input type="text" maxlength="10" class="span2" name="to" id="to">
 						</div> 
 					</div> 
 					
@@ -266,6 +298,7 @@
 						<button type="submit" class="btn btn-primary" id="button">Export</button> 
 					</div>
 				</fieldset>
+				<input type="hidden" name="cid" value="" ng-value="cid" />
 			</form>
 		</div>
 		<!-- /widget-header 
@@ -313,6 +346,7 @@
 				</th>
 				<th>Program</th>
 				<th>Volunteer</th>
+				<th># Bags</th>
 				<th class="td-actions"> </th>
 			  </tr>
 			</thead>
@@ -322,6 +356,7 @@
 				<td>{{ visit.dateOfVisit }}</td>
 				<td>{{ visit.program }}</td>
 				<td>{{ visit.volunteer }}</td>
+				<td>{{ visit.numBags }}</td>
 				<td class="td-actions"><a href="" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
 			  </tr>	
 			  <tr ng-show="!client[0].dateOfVisit"><td colspan="7" class="centerText">No records found</td></tr>
@@ -351,6 +386,10 @@
       changeMonth: true,
       changeYear: true,
 	  dateFormat: 'yy-mm-dd'
+    });
+	$( "#lastDateWorked" ).datepicker({
+      changeMonth: true,
+      changeYear: true
     });
   });
 </script>

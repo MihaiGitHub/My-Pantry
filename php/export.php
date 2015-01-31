@@ -1,21 +1,26 @@
 <?php
 try {
-
+/*
 	if(($_POST['id'] == 'undefined') && ($_POST['fname'] == 'undefined') && ($_POST['lname'] == 'undefined') && ($_POST['address'] == 'undefined') && ($_POST['phone'] == 'undefined')){
 		throw new PDOException('Empty data');
 	} 
-	
+	*/
 	require('fpdf/fpdf.php');
 	include 'dbconnect.php';
 	
 	//////////////
 	$x = 0;
-	$sql = "SELECT * FROM `clients` AS c, `visits` AS v WHERE c.id = 111522 AND c.id = v.client_id AND (date_of_visit BETWEEN '2011-01-30 14:15:55' AND '2013-09-29 10:15:55')";
+	$sql = "SELECT * FROM `clients` AS c, `visits` AS v WHERE c.id = :cid AND c.id = v.client_id AND (date_of_visit BETWEEN :from AND :to)";
 
 	$stmt = $objDb->prepare($sql);
-	$result = $stmt->execute($values);
-	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+
+	$result = $stmt->execute(array('cid' => $_POST['cid'], 'from' => $_POST['from'], 'to' => $_POST['to']));
 	
+	
+	
+	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
 	$pdf=new FPDF();
 	$pdf->AddPage();
 $pdf->SetFont('Arial','B',16);
@@ -32,6 +37,8 @@ $row = $stmt->fetchAll();
 				if($y==0){
 					$pdf->Cell(40,10,$fieldvalue['fname'],0,1); // print on beginning of next line if first col
 					$pdf->Cell(40,10,$fieldvalue['lname'],0,1); // print on beginning of next line if first col
+					
+					
 				}
 
 			  if ($y==3){			   			   
@@ -47,6 +54,7 @@ $row = $stmt->fetchAll();
 			
 			} 
 
+		$pdf->Output();
 
 
 
@@ -75,7 +83,6 @@ $row = $stmt->fetchAll();
 		}
 		*/
 		 
-		$pdf->Output();
  	
 //	}
 	
@@ -270,12 +277,12 @@ $pdf->AddPage();
 $pdf->Output();
 */
 	
-	
+	/*
 	echo json_encode(array(
 		'error' => false,
 		'clients' => $row
 	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-	
+	*/
 
 } catch(PDOException $e) {
 

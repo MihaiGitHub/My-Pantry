@@ -76,6 +76,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 			
+			console.log($scope);
 		}
 	})
 	
@@ -97,6 +98,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		thisData += "&email=" + $scope.client[0].email;
 		thisData += "&employed=" + $scope.client[0].employed;
 		thisData += "&lastDateWorked=" + $scope.client[0].lastDateWorked;
+		thisData += "&annualIncome=" + $scope.client[0].annualIncome;
+		thisData += "&incomeUpdated=" + $scope.client[0].incomeUpdated;
 		thisData += "&inHouse=" + $scope.client[0].inHouse;
 		thisData += "&howManyMales=" + $scope.client[0].howManyMales;
 		thisData += "&howManyFemales=" + $scope.client[0].howManyFemales;
@@ -132,6 +135,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
 		thisData += "&numBags=" + $scope.numBags;
+		thisData += "&weight=" + $scope.weight;
 		thisData += "&volunteer=" + $scope.volunteer.volunteer;
 						
 		$http({
@@ -321,6 +325,8 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		thisData += "&email=" + $scope.email;
 		thisData += "&employed=" + $scope.employed;
 		thisData += "&lastDateWorked=" + $scope.lastDateWorked;
+		thisData += "&annualIncome=" + $scope.annualIncome;
+		thisData += "&incomeUpdated=" + $scope.incomeUpdated;
 		thisData += "&inHouse=" + $scope.inHouse;
 		thisData += "&howManyMales=" + $scope.howManyMales;
 		thisData += "&howManyFemales=" + $scope.howManyFemales;
@@ -330,6 +336,7 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 		thisData += "&program=" + $scope.program;
 		thisData += "&numBags=" + $scope.numBags;
+		thisData += "&weight=" + $scope.weight;
 		thisData += "&volunteer=" + $scope.volunteer.volunteer;
 				
 		$http({

@@ -146,6 +146,20 @@
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
+						<label class="control-label" for="annualIncome">Annual Income</label>
+						<div class="controls">
+							<input type="text" class="span4" id="annualIncome" ng-model="annualIncome">
+						</div> <!-- /controls -->
+					</div> <!-- /control-group -->
+					
+					<div class="control-group">											
+						<label class="control-label" for="incomeUpdated">Income Updated</label>
+						<div class="controls">
+							<input type="text" class="span4" id="incomeUpdated" ng-model="incomeUpdated">
+						</div> <!-- /controls -->
+					</div> <!-- /control-group -->
+					
+					<div class="control-group">											
 						<label class="control-label" for="inHouse">How many in house</label>
 						<div class="controls">
 							<select id="inHouse" class="span4" ng-model="inHouse">
@@ -257,6 +271,13 @@
 					</div> <!-- /control-group -->
 					
 					<div class="control-group relative">											
+						<label class="control-label" for="weight">Weight</label>
+						<div class="controls">
+							<input type="text" placeholder="pounds" class="span4" id="weight" ng-model="weight">
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					
+					<div class="control-group relative">											
 						<label class="control-label" for="program">Program</label>
 						<div class="controls">
 							<select id="program" class="span4" ng-model="program">
@@ -288,12 +309,20 @@
 
     $( "#dateOfVisit" ).datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+	  dateFormat: "yy-m-d"
     });
 	
 	$( "#lastDateWorked" ).datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+	  dateFormat: "yy-m-d"
+    });
+	
+	$( "#incomeUpdated" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+	  dateFormat: "yy-m-d"
     });
   });
 </script>

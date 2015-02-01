@@ -137,7 +137,19 @@
 						</div> <!-- /controls -->		
 					</div> <!-- /control-group -->
 					
+					<div class="control-group">											
+						<label class="control-label" for="annualIncome">Annual Income</label>
+						<div class="controls">
+							<input type="text" class="span4" id="annualIncome" ng-model="client[0].annualIncome">
+						</div> <!-- /controls -->
+					</div> <!-- /control-group -->
 					
+					<div class="control-group">											
+						<label class="control-label" for="incomeUpdated">Income Updated</label>
+						<div class="controls">
+							<input type="text" class="span4" id="incomeUpdated" ng-model="client[0].incomeUpdated">
+						</div> <!-- /controls -->
+					</div> <!-- /control-group -->	
 					
 					<div class="control-group">											
 						<label class="control-label" for="inHouse">How many in house</label>
@@ -240,6 +252,13 @@
 								<option value="5">5</option>
 							</select>
 						</div> <!-- /controls -->
+					</div> <!-- /control-group -->
+					
+					<div class="control-group relative">											
+						<label class="control-label" for="weight">Weight</label>
+						<div class="controls">
+							<input type="text" placeholder="pounds" class="span4" id="weight" ng-model="weight">
+						</div> <!-- /controls -->		
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
@@ -347,7 +366,7 @@
 				<th>Program</th>
 				<th>Volunteer</th>
 				<th># Bags</th>
-				<th class="td-actions"> </th>
+			<!--	<th class="td-actions"> </th> -->
 			  </tr>
 			</thead>
 			<tbody>
@@ -357,7 +376,7 @@
 				<td>{{ visit.program }}</td>
 				<td>{{ visit.volunteer }}</td>
 				<td>{{ visit.numBags }}</td>
-				<td class="td-actions"><a href="" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+			<!--	<td class="td-actions"><a href="" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td> -->
 			  </tr>	
 			  <tr ng-show="!client[0].dateOfVisit"><td colspan="7" class="centerText">No records found</td></tr>
 			</tbody>
@@ -389,7 +408,13 @@
     });
 	$( "#lastDateWorked" ).datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+	  dateFormat: 'yy-mm-dd'
+    });
+	$( "#incomeUpdated" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+	  dateFormat: "yy-m-d"
     });
   });
 </script>

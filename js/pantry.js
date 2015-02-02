@@ -7,6 +7,7 @@ pantryApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'});
   $routeProvider.when('/search', {templateUrl: 'partials/searchclient.html', controller: 'navCtrl'});
   $routeProvider.when('/add', {templateUrl: 'partials/addclient.html'});
+  $routeProvider.when('/vol', {templateUrl: 'partials/volunteers.html'});
   $routeProvider.when('/edit/:id', {templateUrl: 'partials/editclient.html'});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
@@ -356,6 +357,54 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		});	
 
 	};
+});
+
+pantryApp.controller('volunteerController', function ($scope, $http){ 
+	var urlVolunteers = 'php/volunteers.php';	
+	var thisData = "volunteer=all";
+	
+	$http({
+		method: 'POST',
+		url: urlVolunteers,
+		data: thisData,
+		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+	})
+	
+	.success(function(data, status) {
+		$scope.volunteers = data.volunteers;
+	})
+	
+	.error(function(data, status) {
+		$scope.data = data || "Request failed";
+		$scope.status = status;			
+	});	
+	
+	$scope.toggle = function(id, active){ 
+		var thisData = "id=" + id;	
+		thisData += "&volunteer=update";
+		thisData += "&active=" + active;
+		
+				
+		$http({
+			method: 'POST',
+			url: urlVolunteers,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {
+			$scope.volunteers = data.volunteers;
+			console.log($scope);
+			//$location.path('/search');
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+
+	};
+
 });
 
 pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {

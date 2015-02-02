@@ -1,0 +1,37 @@
+<div class="span12" ng-controller="volunteerController">
+
+<div class="widget widget-table action-table">
+	<div class="widget-header"> <i class="icon-th-list"></i>
+	  <h3>Volunteers</h3>
+	  
+	</div>
+	<!-- /widget-header -->
+	<div class="widget-content">
+		<form id="edit-profile" class="form-horizontal">
+		  <table class="table table-striped table-bordered">
+			<thead>
+			  <tr>
+				<th>ID</th>
+				<th>Volunteer</th>
+				<th>Active</th>
+				<th class="td-actions"> </th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr ng-repeat="volunteer in volunteers" ng-show="volunteers.length">
+				<td>{{ volunteer.id }}</td>
+				<td>{{ volunteer.volunteer }}</td>
+				<td>{{ volunteer.active }}</td>
+				<td class="td-actions">
+				<!--	<a ng-href="#/edit/{{volunteer.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a> -->
+					<button type="submit" class="btn btn-primary" ng-click="toggle(volunteer.id, volunteer.active)">Change</button> 
+				</td>
+			  </tr>	
+			  <tr ng-show="!volunteers.length"><td colspan="7" class="centerText">No records found</td></tr>
+			</tbody>
+		  </table>
+	  </form>
+	</div>
+	<!-- /widget-content --> 	
+</div>	
+</div>	

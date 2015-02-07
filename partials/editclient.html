@@ -121,7 +121,7 @@
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
-						<label class="control-label" for="employed">Head of household currently employed</label>
+						<label class="control-label" for="employed">Head of household currently employed?</label>
 						<div class="controls">
 							<select id="employed" class="span4" ng-model="client[0].employed">
 								<option value="yes">Yes</option>
@@ -240,7 +240,7 @@
 							<input type="text" maxlength="10" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
 						</div> <!-- /controls -->
 					</div> <!-- /control-group -->
-					
+					<!--
 					<div class="control-group">											
 						<label class="control-label" for="numBags">Number of bags</label>
 						<div class="controls">
@@ -251,11 +251,11 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 							</select>
-						</div> <!-- /controls -->
-					</div> <!-- /control-group -->
+						</div>
+					</div>  /control-group -->
 					
 					<div class="control-group relative">											
-						<label class="control-label" for="weight">Weight</label>
+						<label class="control-label" for="weight">Weight (lbs)</label>
 						<div class="controls">
 							<input type="text" placeholder="pounds" class="span4" id="weight" ng-model="weight">
 						</div> <!-- /controls -->		
@@ -289,6 +289,7 @@
 		</div>
 		<!-- /widget-content --> 
 	</div>
+	<!--
 	<div class="widget">
 		<div class="widget-header"> <i class="icon-plus-sign"></i>
 		  <h3>Export Client Visits</h3>
@@ -320,35 +321,8 @@
 				<input type="hidden" name="cid" value="" ng-value="cid" />
 			</form>
 		</div>
-		<!-- /widget-header 
-		<div class="widget-content">
-			<form id="edit-profile" class="form-horizontal">
-				<fieldset>		
-					<br/>
-					<div class="control-group">											
-						<label class="control-label" for="from">From</label>
-						<div class="controls">
-							<input type="text" maxlength="10" class="span2" id="from" ng-model="from">
-						</div> 
-					</div> 
-					
-					<div class="control-group">											
-						<label class="control-label" for="to">To</label>
-						<div class="controls">
-							<input type="text" maxlength="10" class="span2" id="to" ng-model="to">
-						</div> 
-					</div> 
-					
-					<br />
-					
-					<div class="form-actions">
-						<button type="submit" class="btn btn-primary" ng-click="exportPDF()" id="button">Export</button> 
-					</div>
-				</fieldset>
-			</form>
-		</div>-->
-		<!-- /widget-content --> 
-	</div>
+	</div> -->
+	
 	<div class="widget widget-table action-table">
 		<div class="widget-header"> <i class="icon-th-list"></i>
 		  <h3>Client Visits</h3>

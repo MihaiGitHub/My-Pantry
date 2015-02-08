@@ -57,8 +57,9 @@ textarea {
 }
 
 .navbar-inner {
-	/*padding: 7px 0;*/
-	background: #00ba8b !important;
+	/*padding: 7px 0;
+	background: #00ba8b !important;*/
+	background: #580000 !important;
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;

@@ -13,7 +13,7 @@ pantryApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 pantryApp.run(function($rootScope, $location, loginService){
-	var routespermission=['/search', '/add', '/edit'];  //route that require login
+	var routespermission=['/search', '/add', '/edit', '/vol'];  //route that require login
 	
 	$rootScope.$on('$routeChangeStart', function(){
 		if( routespermission.indexOf($location.path()) !=-1)
@@ -158,38 +158,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.status = status;			
 		});	
 	
-	};
-	/*
-	$scope.exportPDF = function(){ 
-		var thisData = id;
-		thisData += "&from=" + $scope.client[0].from;
-		thisData += "&to=" + $scope.client[0].to;
-						
-		$http({
-			method: 'POST',
-			url: urlExport,
-			data: thisData,
-			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-		})
-		
-		.success(function(data, status) { 
-		
-		
-		console.log(data);
-		
-			if(data.client){
-				$scope.visits = data.client;
-			
-			}
-		
-		})
-		
-		.error(function(data, status) {
-			$scope.data = data || "Request failed";
-			$scope.status = status;			
-		});	
-	
-	};*/	
+	};	
 
 });
 

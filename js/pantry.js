@@ -172,7 +172,8 @@ pantryApp.controller('searchController', function ($scope, $http){
     ];
     
     $scope.form = {idType : $scope.typeOptions[0].value, fnameType : $scope.typeOptions[0].value, lnameType : $scope.typeOptions[0].value, 
-					addressType : $scope.typeOptions[0].value, phoneType : $scope.typeOptions[0].value};
+					addressType : $scope.typeOptions[0].value, phoneType : $scope.typeOptions[0].value, emailType : $scope.typeOptions[0].value,
+					numInHouseType : $scope.typeOptions[0].value, commentsType : $scope.typeOptions[0].value};
 	
 	// create modal on load and hide it
 	$( ".dialog-confirm" ).dialog({
@@ -205,6 +206,12 @@ pantryApp.controller('searchController', function ($scope, $http){
 		thisData += "&addressType=" + $scope.form.addressType;
 		thisData += "&phone=" + $scope.phone;
 		thisData += "&phoneType=" + $scope.form.phoneType;
+		thisData += "&email=" + $scope.email;
+		thisData += "&emailType=" + $scope.form.emailType;
+		thisData += "&numInHouse=" + $scope.numInHouse;
+		thisData += "&numInHouseType=" + $scope.form.numInHouseType;
+		thisData += "&comments=" + $scope.comments;
+		thisData += "&commentsType=" + $scope.form.commentsType;
 		
 		$http({
 			method: 'POST',

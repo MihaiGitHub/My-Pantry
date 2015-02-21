@@ -1,14 +1,14 @@
 <?php
 try {
-
+/*
 	if(($_POST['id'] == 'undefined') && ($_POST['fname'] == 'undefined') && ($_POST['lname'] == 'undefined') && ($_POST['address'] == 'undefined') && ($_POST['phone'] == 'undefined')){
 		throw new PDOException('Empty data');
 	} 
-
+*/
 	include 'dbconnect.php';
 	
 	$flag = 0;	
-	$sql = 'SELECT id, fname, lname, address, phone, inhouse FROM clients WHERE ';
+	$sql = 'SELECT id, fname, lname, address, phone, inhouse, email FROM clients WHERE ';
 	
 	$values = array();
 	if($_POST['id'] != 'undefined'){
@@ -58,7 +58,7 @@ try {
 			$sql .= " AND address LIKE :address";
 		}
 		
-		if($_POST['address'] == 'contains'){
+		if($_POST['addressType'] == 'contains'){
 			$values['address'] = '%'.$_POST['address'].'%';
 		} else {
 			$values['address'] = $_POST['address'].'%';
@@ -72,10 +72,55 @@ try {
 			$sql .= " AND phone LIKE :phone";
 		}
 		
-		if($_POST['phone'] == 'contains'){
+		if($_POST['phoneType'] == 'contains'){
 			$values['phone'] = '%'.$_POST['phone'].'%';
 		} else {
 			$values['phone'] = $_POST['phone'].'%';
+		}
+	}
+	
+	if($_POST['email'] != 'undefined'){
+		if($flag == 0){
+			$sql .= "email LIKE :email";
+			$flag = 1;
+		} else {
+			$sql .= " AND email LIKE :email";
+		}
+		
+		if($_POST['emailType'] == 'contains'){
+			$values['email'] = '%'.$_POST['email'].'%';
+		} else {
+			$values['email'] = $_POST['email'].'%';
+		}
+	}
+	
+	if($_POST['numInHouse'] != 'undefined'){
+		if($flag == 0){
+			$sql .= "inhouse LIKE :numInHouse";
+			$flag = 1;
+		} else {
+			$sql .= " AND inhouse LIKE :numInHouse";
+		}
+		
+		if($_POST['numInHouseType'] == 'contains'){
+			$values['numInHouse'] = '%'.$_POST['numInHouse'].'%';
+		} else {
+			$values['numInHouse'] = $_POST['numInHouse'].'%';
+		}
+	}
+	
+	if($_POST['comments'] != 'undefined'){
+		if($flag == 0){
+			$sql .= "comments LIKE :comments";
+			$flag = 1;
+		} else {
+			$sql .= " AND comments LIKE :comments";
+		}
+		
+		if($_POST['comments'] == 'contains'){
+			$values['comments'] = '%'.$_POST['comments'].'%';
+		} else {
+			$values['comments'] = $_POST['comments'].'%';
 		}
 	}
 	

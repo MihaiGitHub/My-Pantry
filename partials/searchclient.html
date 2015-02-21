@@ -18,6 +18,9 @@
 								<td>Last Name</td>
 								<td>Address</td>
 								<td>Phone Number</td>
+								<td>Email</td>
+								<td># In House</td>
+								<td>Comments</td>
 							</tr>
 							<tr>
 								<td><select ng-model='form.idType' ng-options='option.value as option.name for option in typeOptions'></select></td>
@@ -25,13 +28,19 @@
 								<td><select ng-model='form.lnameType' ng-options='option.value as option.name for option in typeOptions'></select>								
 								<td><select ng-model='form.addressType' ng-options='option.value as option.name for option in typeOptions'></select>								
 								<td><select ng-model='form.phoneType' ng-options='option.value as option.name for option in typeOptions'></select>								
+								<td><select ng-model='form.emailType' ng-options='option.value as option.name for option in typeOptions'></select>	
+								<td><select ng-model='form.numInHouseType' ng-options='option.value as option.name for option in typeOptions'></select>	
+								<td><select ng-model='form.commentsType' ng-options='option.value as option.name for option in typeOptions'></select>																								
 							</tr>
 							<tr>
-								<td><input type="text" class="span3" id="clientID" ng-model="clientID"></td>
-								<td><input type="text" class="span3" id="firstname" ng-model="fname"></td>
-								<td><input type="text" class="span3" id="lname" ng-model="lname"></td>
-								<td><input type="text" class="span3" id="address" ng-model="address"></td>
-								<td><input type="text" class="span3" id="phone" ng-model="phone"></td>
+								<td><input type="text" class="span2" id="clientID" ng-model="clientID"></td>
+								<td><input type="text" class="span2" id="firstname" ng-model="fname"></td>
+								<td><input type="text" class="span2" id="lname" ng-model="lname"></td>
+								<td><input type="text" class="span2" id="address" ng-model="address"></td>
+								<td><input type="text" class="span2" id="phone" ng-model="phone"></td>
+								<td><input type="text" class="span2" id="email" ng-model="email"></td>
+								<td><input type="text" class="span2" id="numInHouse" ng-model="numInHouse"></td>
+								<td><input type="text" class="span2" id="comments" ng-model="comments"></td>
 							</tr>
 						</table>										
 					</div> <!-- /control-group -->

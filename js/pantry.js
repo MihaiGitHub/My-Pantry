@@ -7,6 +7,7 @@ pantryApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'});
   $routeProvider.when('/search', {templateUrl: 'partials/searchclient.html', controller: 'navCtrl'});
   $routeProvider.when('/add', {templateUrl: 'partials/addclient.html'});
+  $routeProvider.when('/reports', {templateUrl: 'partials/reports.html'});
   $routeProvider.when('/vol', {templateUrl: 'partials/volunteers.html'});
   $routeProvider.when('/edit/:id', {templateUrl: 'partials/editclient.html'});
   $routeProvider.otherwise({redirectTo: '/login'});

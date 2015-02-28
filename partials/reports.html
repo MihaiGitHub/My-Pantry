@@ -1,0 +1,123 @@
+<div ng-controller="insertController">
+<div class="span6">
+<div class="widget widget-nopad">
+	<div class="widget">
+		<div class="widget">
+			<div class="widget-header"> <i class="icon-plus-sign"></i>
+			  <h3>Export Client Visits</h3>
+			</div>
+			<div class="widget-content">
+				<form method="post" id="edit-profile" class="form-horizontal" action="php/export.php" target="_blank">
+					<fieldset>		
+						<br/>
+						<div class="control-group">											
+							<label class="control-label" for="from">From</label>
+							<div class="controls">
+								<input type="text" maxlength="10" class="span2" name="from" id="from">
+							</div> 
+						</div> 
+						
+						<div class="control-group">											
+							<label class="control-label" for="to">To</label>
+							<div class="controls">
+								<input type="text" maxlength="10" class="span2" name="to" id="to">
+							</div> 
+						</div> 
+						
+						<br />
+						
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary" id="button">Export</button> 
+						</div>
+					</fieldset>
+					<input type="hidden" name="cid" value="" ng-value="cid" />
+				</form>
+			</div>
+		</div>
+				
+	</div>
+</div>
+</div>
+<div class="span6">
+<div class="widget widget-nopad">
+	<div class="widget">
+		<div class="widget-header"> <i class="icon-plus-sign"></i>
+		  <h3>Add Visit</h3>
+		</div>
+			
+		<!-- /widget-header -->
+		<div class="widget-content">
+			 <form id="edit-profile" class="form-horizontal">
+				<fieldset>
+					
+					<br/>		
+					
+					<div class="control-group relative">											
+						<label class="control-label" for="dateOfVisit">Date of Visit</label>
+						<div class="controls">
+							<input type="text" maxlength="0" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					
+					<div class="control-group">											
+						<label class="control-label" for="volunteer">Volunteer</label>
+						<div class="controls">
+							<select id="volunteer" class="span4" ng-model="volunteer" ng-options="v.volunteer for v in volunteers track by v.volunteer"></select>
+						</div> <!-- /controls -->	
+					</div> <!-- /control-group -->
+					<!--
+					<div class="control-group relative">											
+						<label class="control-label" for="numBags">Number of bags</label>
+						<div class="controls">
+							<select id="numBags" class="span4" ng-model="numBags">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div> 	
+					</div>  /control-group -->
+					
+					<div class="control-group relative">											
+						<label class="control-label" for="weight">Weight (lbs)</label>
+						<div class="controls">
+							<input type="text" class="span4" id="weight" ng-model="weight">
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					
+					<div class="control-group relative">											
+						<label class="control-label" for="program">Program</label>
+						<div class="controls">
+							<select id="program" class="span4" ng-model="program">
+								<option value="2 Food Box/Hygiene/Fruit AND OR Vegetables">2 Food Box/Hygiene/Fruit AND OR Vegetables</option>
+								<option value="1 Food Box only">1 Food Box only</option>
+								<option value="7 Thanksgiving Food Box">7 Thanksgiving Food Box</option>
+							</select>
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+									
+				</fieldset>
+			</form>
+		</div>
+		<!-- /widget-content --> 
+	</div>
+</div>
+</div>
+</div>
+<script>
+  $(function() {
+	
+	$( "#from" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+	  dateFormat: "yy-m-d"
+    });
+	
+	$( "#to" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+	  dateFormat: "yy-m-d"
+    });
+  });
+</script>

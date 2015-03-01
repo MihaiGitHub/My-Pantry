@@ -58,7 +58,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 	var urlExport = 'php/export.php';	
 	
 	var id = "id=" + $routeParams.id;
-	$scope.cid = $routeParams.id;
+//	$scope.cid = $routeParams.id;
 	
 	$http({
 		method: 'POST',

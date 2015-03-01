@@ -116,17 +116,17 @@ define ('PDF_AUTHOR', 'TCPDF');
 /**
  * header title
  */
-define ('PDF_HEADER_TITLE', 'TCPDF Example');
+define ('PDF_HEADER_TITLE', 'Visits Report');
 
 /**
  * header description string
  */
-define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
+define ('PDF_HEADER_STRING');
 
 /**
  * image logo
  */
-define ('PDF_HEADER_LOGO', 'tcpdf_logo.jpg');
+define ('PDF_HEADER_LOGO', 'rsz_pantry.jpg');
 
 /**
  * header logo image width [mm]

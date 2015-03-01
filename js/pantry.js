@@ -325,7 +325,13 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		})
 		
 		.success(function(data, status) {
-			$location.path('/search');
+			console.log(data, status);
+			if(data.error){
+				$('.alert').css('display','block');
+				window.scrollTo(0, 0);
+			} else{
+				$location.path('/search');
+			}
 		})
 		
 		.error(function(data, status) {

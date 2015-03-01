@@ -17,19 +17,20 @@ try {
 		if(!$stmt->execute(array('dateOfVisit' => $_POST['dateOfVisit'], 'lname' => $_POST['lname'], 'fname' => $_POST['fname'], 'howManyInHouse' => $_POST['inHouse'], 
 						'phone' => $_POST['phone'], 'email' => $_POST['email'], 'program' => $_POST['program'], 'volunteer' => $_POST['volunteer'], 'numBags' => $_POST['numBags'], 'weight' => $_POST['weight'], 'clientID' => $_POST['id']))){
 							 
-			throw new PDOException('The execute method failed');
+			echo json_encode(array(
+				'error' => true,
+				'message' => $e->getMessage()
+			), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 		}
+	} else {
+		echo json_encode(array(
+			'error' => true,
+			'message' => $e->getMessage()
+		), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 	}
-
-	echo json_encode(array(
-		'error' => false
-	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-	
 } catch(PDOException $e) {
-
 	echo json_encode(array(
 		'error' => true,
 		'message' => $e->getMessage()
 	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-	
 }

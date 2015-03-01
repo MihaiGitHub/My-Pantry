@@ -1,6 +1,10 @@
 <?php
 try {
-ini_set('memory_limit', '512M');
+	ini_set('max_execution_time', 5500);
+
+ini_set('memory_limit', '10024M');
+set_time_limit(1200);
+
 require_once('tcpdf/tcpdf.php');
 include 'dbconnect.php';
 // create new PDF document
@@ -55,11 +59,11 @@ $pdf->SetFont('dejavusans', '', 9, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
-$pdf->AddPage();
+$pdf->AddPage('L');
 
 // set text shadow effect
 $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
-
+	if($_POST['report'] == 'clientVisits'){
 $sql = "SELECT * FROM `clients` AS c, `visits` AS v WHERE c.id = v.client_id AND (date_of_visit BETWEEN :from AND :to)";
 //$sql = "SELECT * FROM `clients` AS c, `visits` AS v WHERE c.id = 1126241 AND c.id = v.client_id AND (date_of_visit BETWEEN '2010-1-14' AND '2015-1-14')";
 $stmt = $objDb->prepare($sql);
@@ -79,7 +83,24 @@ while($row = $stmt->fetch()){
 
 $html .= '</table>
 <p><i>This report was generated between '.$_POST['from'].' and '.$_POST['to'].' and the total weight for this period is: '.$weight.' lbs</i>.</p>';
+	} else {
+$sql = "SELECT * FROM `clients`";
+$stmt = $objDb->prepare($sql);
+$result = $stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
 
+// Set some content to print
+$html .= '<h1>Client Visits By Date Range</h1>';
+
+$html .= '<table><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th># In House</th><th>Email</th><th>Annual Income</th><th>Income Updated</th></tr>';
+while($row = $stmt->fetch()){
+	$html .= '<tr><td>'.$row['id'].'</td><td>'.$row['fname'].'</td><td>'.$row['lname'].'</td><td>'.$row['address'].'</td><td>'.$row['phone'].'</td><td>'.$row['inhouse'].'</td><td>'.$row['email'].'</td><td>'.$row['annual_income'].'</td><td>'.$row['income_updated'].'</td></tr>';
+}
+
+$html .= '</table>
+<p><i>This report was generated for all clients in database.</i></p>';
+
+	}
 // Print text using writeHTMLCell()
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
@@ -87,22 +108,8 @@ $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('clientvisits.pdf', 'I');
-
-
-	
-	/*
-	echo json_encode(array(
-		'error' => false,
-		'clients' => $row
-	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-	*/
+$pdf->Output('report.pdf', 'I');
 
 } catch(PDOException $e) {
-
-	echo json_encode(array(
-		'error' => true,
-		'message' => $e->getMessage()
-	), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-	
+	print_r($e);
 }

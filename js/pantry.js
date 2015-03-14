@@ -345,26 +345,6 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 	var urlDelete = 'php/delete.php';
 	var thisData = "volunteers=all";
 	
-	// create modal on load and hide it
-	$( ".dialog-confirm" ).dialog({
-	  autoOpen: false,
-      resizable: false,
-      height:140,
-      modal: true,
-      buttons: {
-        "Delete": function() { 
-		
-			var id = $(this).attr('id');
-			deleteClient(id);
-			$(this).dialog('close');		
-		
-        },
-        Cancel: function() {
-			$(this).dialog('close');
-        }
-      }
-    });
-	
 	$http({
 		method: 'POST',
 		url: urlVolunteers,
@@ -381,14 +361,7 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 		$scope.status = status;			
 	});
 	
-	$scope.deleteModal = function(){
-		$(".table tbody").on("click", "tr .btn-danger", function(e){
-			$('.dialog-confirm').attr('id', $(this).attr('id'));
-			$('.dialog-confirm').dialog('open');
-		});
-	};
-	
-	var deleteClient = function (id) {
+	$scope.deleteVolunteer = function (id) { console.log(id);
 		
 		var thisData = "id=" + id;
 		thisData += "&delete=volunteer";

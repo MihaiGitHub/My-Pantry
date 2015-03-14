@@ -64,9 +64,9 @@
 				<!--	<a ng-href="#/edit/{{volunteer.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a> -->
 					<button type="submit" class="btn btn-primary" ng-click="toggle(volunteer.id, volunteer.active)">Change</button> 
 				</td>
-				<td class="td-actions"><a href="" id="{{ volunteer.id }}" class="btn btn-danger btn-small" ng-click="deleteModal()"><i class="btn-icon-only icon-remove"> </i></a>
+				<td class="td-actions"><a href="" class="btn btn-danger btn-small" ng-click="deleteVolunteer( volunteer.id )"><i class="btn-icon-only icon-remove"> </i></a>
                 
-                <a href="" id="{{ volunteer.id }}" class="btn btn-danger btn-small" onclick="deleteModal2()"><i class="btn-icon-only icon-remove"> </i></a>
+                
                 </td>
 			  </tr>	
 			  <tr ng-show="!volunteers.length"><td colspan="7" class="centerText">No records found</td></tr>

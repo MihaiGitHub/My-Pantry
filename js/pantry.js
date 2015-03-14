@@ -234,13 +234,11 @@ pantryApp.controller('searchController', function ($scope, $http){
 
 	};	
 	
-	$scope.deleteModal = function(){ 
-	
+	$scope.deleteModal = function(){
 		$(".table tbody").on("click", "tr .btn-danger", function(e){
 			$('.dialog-confirm').attr('id', $(this).attr('id'));
 			$('.dialog-confirm').dialog('open');
 		});
-
 	};
 	
 	var deleteClient = function (id) {
@@ -279,7 +277,7 @@ pantryApp.controller('searchController', function ($scope, $http){
 	};
 });
 
-pantryApp.controller('insertController', function ($scope, $http, $location){ 
+pantryApp.controller('insertController', function ($scope, $http, $location){
 	var urlInsert = 'php/insert.php';	
 	var urlVolunteers = 'php/volunteers.php';
 	
@@ -327,7 +325,7 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 		.success(function(data, status) {
 			console.log(data, status);
 			if(data.error){
-				$('.alert').css('display','block');
+				$('.alertt').css('display','block');
 				window.scrollTo(0, 0);
 			} else{
 				$location.path('/search');
@@ -343,8 +341,29 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 });
 
 pantryApp.controller('volunteerController', function ($scope, $http){ 
-	var urlVolunteers = 'php/volunteers.php';	
-	var thisData = "volunteer=all";
+	var urlVolunteers = 'php/volunteers.php';
+	var urlDelete = 'php/delete.php';
+	var thisData = "volunteers=all";
+	
+	// create modal on load and hide it
+	$( ".dialog-confirm" ).dialog({
+	  autoOpen: false,
+      resizable: false,
+      height:140,
+      modal: true,
+      buttons: {
+        "Delete": function() { 
+		
+			var id = $(this).attr('id');
+			deleteClient(id);
+			$(this).dialog('close');		
+		
+        },
+        Cancel: function() {
+			$(this).dialog('close');
+        }
+      }
+    });
 	
 	$http({
 		method: 'POST',
@@ -360,13 +379,41 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 	.error(function(data, status) {
 		$scope.data = data || "Request failed";
 		$scope.status = status;			
-	});	
+	});
+	
+	$scope.deleteModal = function(){
+		$(".table tbody").on("click", "tr .btn-danger", function(e){
+			$('.dialog-confirm').attr('id', $(this).attr('id'));
+			$('.dialog-confirm').dialog('open');
+		});
+	};
+	
+	var deleteClient = function (id) {
+		
+		var thisData = "id=" + id;
+		thisData += "&delete=volunteer";
+				
+		$http({
+			method: 'POST',
+			url: urlDelete,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {
+			$scope.volunteers = data.volunteers;
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+	};
 	
 	$scope.toggle = function(id, active){ 
 		var thisData = "id=" + id;	
-		thisData += "&volunteer=update";
+		thisData += "&volunteers=update";
 		thisData += "&active=" + active;
-		
 				
 		$http({
 			method: 'POST',
@@ -377,7 +424,6 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 		
 		.success(function(data, status) {
 			$scope.volunteers = data.volunteers;
-			console.log($scope);
 			//$location.path('/search');
 		})
 		
@@ -387,6 +433,30 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 		});	
 
 	};
+	
+	$scope.insert = function(){
+		var thisData = "volunteers=insert";
+		thisData += "&volunteer=" + $scope.volunteer;
+		thisData += "&active=" + $scope.active;
+
+		$http({
+			method: 'POST',
+			url: urlVolunteers,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {
+			$scope.volunteers = data.volunteers;
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+
+	};
+	
 
 });
 

@@ -1,4 +1,41 @@
 <div class="span12" ng-controller="volunteerController">
+<div class="widget widget-table action-table">
+	<div class="widget-header"> <i class="icon-plus-sign"></i>
+	  <h3>Add Volunteer</h3>
+	  
+	</div>
+	<!-- /widget-header -->
+	<div class="widget-content">
+		<form id="edit-profile" class="form-horizontal">
+				<fieldset>
+					
+					<br/>		
+					
+					<div class="control-group relative" style="float:left;">											
+						<label class="control-label" for="volunteer">Full Name</label>
+						<div class="controls">
+							<input type="text" class="span4" id="volunteer" ng-model="volunteer">
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					
+					<div class="control-group relative" style="float:right;margin-right:10px;">											
+						<label class="control-label" for="active">Active</label>
+						<div class="controls">
+							<select id="active" class="span4" ng-model="active">
+								<option value="Y">Yes</option>
+								<option value="N">No</option>
+							</select>
+						</div> <!-- /controls -->		
+					</div> <!-- /control-group -->
+					<br/>
+					<div class="form-actions" style="text-align:right;">
+						<button type="submit" class="btn btn-primary" ng-click="insert()">Save</button> 
+					</div> <!-- /form-actions -->				
+				</fieldset>
+			</form>
+	</div>
+	<!-- /widget-content --> 	
+</div>	
 
 <div class="widget widget-table action-table">
 	<div class="widget-header"> <i class="icon-th-list"></i>
@@ -15,6 +52,7 @@
 				<th>Volunteer</th>
 				<th>Active</th>
 				<th class="td-actions"> </th>
+                <th class="td-actions"> </th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -26,6 +64,10 @@
 				<!--	<a ng-href="#/edit/{{volunteer.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a> -->
 					<button type="submit" class="btn btn-primary" ng-click="toggle(volunteer.id, volunteer.active)">Change</button> 
 				</td>
+				<td class="td-actions"><a href="" id="{{ volunteer.id }}" class="btn btn-danger btn-small" ng-click="deleteModal()"><i class="btn-icon-only icon-remove"> </i></a>
+                
+                <a href="" id="{{ volunteer.id }}" class="btn btn-danger btn-small" onclick="deleteModal2()"><i class="btn-icon-only icon-remove"> </i></a>
+                </td>
 			  </tr>	
 			  <tr ng-show="!volunteers.length"><td colspan="7" class="centerText">No records found</td></tr>
 			</tbody>
@@ -34,4 +76,36 @@
 	</div>
 	<!-- /widget-content --> 	
 </div>	
-</div>	
+</div>
+<div class="ui-widget-overlay ui-front" style="z-index: 101;display:none;"></div>
+<script>
+function deleteModal2(){
+	$('#myModal').addClass('in');
+	$('.ui-widget-overlay').css('display','block');	
+}
+</script>
+<!--
+<div class="dialog-confirm" title="Delete record?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The client will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
+-->
+
+<a href="#myModal" target="_self" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+herere
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
+                                                      <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        <h3 id="myModalLabel">Thank you for visiting EGrappler.com</h3>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <p>One fine body…</p>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                        <button class="btn btn-primary">Save changes</button>
+                                                      </div>
+                                                    </div>
+                                                    
+                                              <!--      <div class="modal-backdrop fade in"></div> -->
+                                                    herer
+

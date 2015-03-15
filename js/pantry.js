@@ -55,10 +55,10 @@ pantryApp.controller('loginCtrl', ['$scope','$location','loginService', function
 pantryApp.controller('editController', function ($scope, $http, $routeParams, $location){ 
 	var urlEdit = 'php/edit.php';	
 	var urlUpdate = 'php/update.php';	
-	var urlExport = 'php/export.php';	
+	var urlExport = 'php/export.php';
+	var urlDelete = 'php/delete.php';	
 	
 	var id = "id=" + $routeParams.id;
-//	$scope.cid = $routeParams.id;
 	
 	$http({
 		method: 'POST',
@@ -67,9 +67,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 	})
 	
-	.success(function(data, status) { 	
-		if(data.client){ 	
-
+	.success(function(data, status) {
+		if(data.client){
 			$scope.orderByField = 'dateOfVisit';
 			$scope.reverseSort = true;
 			
@@ -78,7 +77,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 			
-			console.log($scope);
+			console.log($scope)
 		}
 	})
 	
@@ -148,9 +147,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		})
 		
 		.success(function(data, status) { 
-			if(data.client){ console.log(data.client);
+			if(data.client){
 				$scope.visits = data.client;
-			
 			}			
 		})
 		
@@ -160,6 +158,32 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		});	
 	
 	};	
+	
+	$scope.deleteVisit = function (visitid) {
+		
+		var thisData = id;
+		thisData += "&visitid=" + visitid;
+		thisData += "&visits=delete";
+				
+		$http({
+			method: 'POST',
+			url: urlDelete,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {
+			$scope.visits = data.visits;
+			
+			console.log($scope.visits)
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+	};
+
 
 });
 
@@ -175,27 +199,6 @@ pantryApp.controller('searchController', function ($scope, $http){
     $scope.form = {idType : $scope.typeOptions[0].value, fnameType : $scope.typeOptions[0].value, lnameType : $scope.typeOptions[0].value, 
 					addressType : $scope.typeOptions[0].value, phoneType : $scope.typeOptions[0].value, emailType : $scope.typeOptions[0].value,
 					numInHouseType : $scope.typeOptions[0].value, commentsType : $scope.typeOptions[0].value};
-	
-/*	// create modal on load and hide it
-	$( ".dialog-confirm" ).dialog({
-	  autoOpen: false,
-      resizable: false,
-      height:140,
-      modal: true,
-      buttons: {
-        "Delete": function() { 
-		
-			var id = $(this).attr('id');
-			deleteClient(id);
-			$(this).dialog('close');		
-		
-        },
-        Cancel: function() {
-			$(this).dialog('close');
-        }
-      }
-    });
-	*/
 	
 	$scope.search = function(){ 
 		var thisData = "id=" + $scope.clientID;
@@ -385,14 +388,14 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 		$scope.status = status;			
 	});
 	
-	$scope.deleteVolunteer = function (id) { console.log(id);
+	$scope.deleteVolunteer = function (id) {
 		
 		var thisData = "id=" + id;
-		thisData += "&delete=volunteer";
+		thisData += "&volunteers=delete";
 				
 		$http({
 			method: 'POST',
-			url: urlDelete,
+			url: urlVolunteers,
 			data: thisData,
 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 		})

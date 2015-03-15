@@ -289,39 +289,6 @@
 		</div>
 		<!-- /widget-content --> 
 	</div>
-	<!--
-	<div class="widget">
-		<div class="widget-header"> <i class="icon-plus-sign"></i>
-		  <h3>Export Client Visits</h3>
-		</div>
-			<div class="widget-content">
-			<form method="post" id="edit-profile" class="form-horizontal" action="php/export.php" target="_blank">
-				<fieldset>		
-					<br/>
-					<div class="control-group">											
-						<label class="control-label" for="from">From</label>
-						<div class="controls">
-							<input type="text" maxlength="10" class="span2" name="from" id="from">
-						</div> 
-					</div> 
-					
-					<div class="control-group">											
-						<label class="control-label" for="to">To</label>
-						<div class="controls">
-							<input type="text" maxlength="10" class="span2" name="to" id="to">
-						</div> 
-					</div> 
-					
-					<br />
-					
-					<div class="form-actions">
-						<button type="submit" class="btn btn-primary" id="button">Export</button> 
-					</div>
-				</fieldset>
-				<input type="hidden" name="cid" value="" ng-value="cid" />
-			</form>
-		</div>
-	</div> -->
 	
 	<div class="widget widget-table action-table">
 		<div class="widget-header"> <i class="icon-th-list"></i>
@@ -344,13 +311,12 @@
 			  </tr>
 			</thead>
 			<tbody>
-			<!-- <tr ng-repeat="visit in visits | orderBy:'dateOfVisit':true" ng-show="client[0].dateOfVisit"> -->
 			<tr ng-repeat="visit in visits | orderBy:orderByField:reverseSort" ng-show="client[0].dateOfVisit">
 				<td>{{ visit.dateOfVisit }}</td>
 				<td>{{ visit.program }}</td>
 				<td>{{ visit.volunteer }}</td>
 				<td>{{ visit.weight }}</td>
-				<td class="td-actions"><a href="" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+				<td class="td-actions"><a href="" class="btn btn-danger btn-small" ng-click="deleteVisit(visit.vid)"><i class="btn-icon-only icon-remove"> </i></a></td>
 			  </tr>	
 			  <tr ng-show="!client[0].dateOfVisit"><td colspan="7" class="centerText">No records found</td></tr>
 			</tbody>

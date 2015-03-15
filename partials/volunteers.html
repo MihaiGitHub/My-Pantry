@@ -2,7 +2,6 @@
 <div class="widget widget-table action-table">
 	<div class="widget-header"> <i class="icon-plus-sign"></i>
 	  <h3>Add Volunteer</h3>
-	  
 	</div>
 	<!-- /widget-header -->
 	<div class="widget-content">
@@ -60,14 +59,8 @@
 				<td>{{ volunteer.id }}</td>
 				<td>{{ volunteer.volunteer }}</td>
 				<td>{{ volunteer.active }}</td>
-				<td class="td-actions">
-				<!--	<a ng-href="#/edit/{{volunteer.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a> -->
-					<button type="submit" class="btn btn-primary" ng-click="toggle(volunteer.id, volunteer.active)">Change</button> 
-				</td>
-				<td class="td-actions"><a href="" class="btn btn-danger btn-small" ng-click="deleteVolunteer( volunteer.id )"><i class="btn-icon-only icon-remove"> </i></a>
-                
-                
-                </td>
+				<td class="td-actions"><button type="submit" class="btn btn-primary" ng-click="toggle(volunteer.id, volunteer.active)">Change</button></td>
+				<td class="td-actions"><a href="" class="btn btn-danger btn-small" ng-click="deleteVolunteer(volunteer.id)"><i class="btn-icon-only icon-remove"> </i></a></td>
 			  </tr>	
 			  <tr ng-show="!volunteers.length"><td colspan="7" class="centerText">No records found</td></tr>
 			</tbody>
@@ -77,35 +70,3 @@
 	<!-- /widget-content --> 	
 </div>	
 </div>
-<div class="ui-widget-overlay ui-front" style="z-index: 101;display:none;"></div>
-<script>
-function deleteModal2(){
-	$('#myModal').addClass('in');
-	$('.ui-widget-overlay').css('display','block');	
-}
-</script>
-<!--
-<div class="dialog-confirm" title="Delete record?">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The client will be permanently deleted and cannot be recovered. Are you sure?</p>
-</div>
--->
-
-<a href="#myModal" target="_self" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
-herere
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
-                                                      <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                        <h3 id="myModalLabel">Thank you for visiting EGrappler.com</h3>
-                                                      </div>
-                                                      <div class="modal-body">
-                                                        <p>One fine body…</p>
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                        <button class="btn btn-primary">Save changes</button>
-                                                      </div>
-                                                    </div>
-                                                    
-                                              <!--      <div class="modal-backdrop fade in"></div> -->
-                                                    herer
-

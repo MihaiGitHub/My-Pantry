@@ -172,7 +172,7 @@ function clicked(value){
 
 			<td class="td-actions">
 				<a ng-href="#/edit/{{client.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a>
-				<a href="" id="{{ client.id }}" class="btn btn-danger btn-small" ng-click="deleteModal()"><i class="btn-icon-only icon-remove"> </i></a>
+				<a href="" class="btn btn-danger btn-small" ng-click="deleteModal(client.id)"><i class="btn-icon-only icon-remove"> </i></a>
 			</td>
 		  </tr>	
 		  <tr ng-show="!clients.length"><td colspan="8" class="centerText">No records found</td></tr>
@@ -182,6 +182,17 @@ function clicked(value){
 	<!-- /widget-content --> 	
 </div>	
 </div>	
-<div class="dialog-confirm" title="Delete record?">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The client will be permanently deleted and cannot be recovered. Are you sure?</p>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Client delete</h3>
+  </div>
+  <div class="modal-body">
+    <p>The client will be permanently deleted and cannot be recovered. Are you sure?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn cancel" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary delete">Delete</button>
+  </div>
 </div>
+<div class="ui-widget-overlay ui-front" style="z-index: 101;display:none;"></div>

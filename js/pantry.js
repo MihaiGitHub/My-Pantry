@@ -176,7 +176,7 @@ pantryApp.controller('searchController', function ($scope, $http){
 					addressType : $scope.typeOptions[0].value, phoneType : $scope.typeOptions[0].value, emailType : $scope.typeOptions[0].value,
 					numInHouseType : $scope.typeOptions[0].value, commentsType : $scope.typeOptions[0].value};
 	
-	// create modal on load and hide it
+/*	// create modal on load and hide it
 	$( ".dialog-confirm" ).dialog({
 	  autoOpen: false,
       resizable: false,
@@ -195,6 +195,7 @@ pantryApp.controller('searchController', function ($scope, $http){
         }
       }
     });
+	*/
 	
 	$scope.search = function(){ 
 		var thisData = "id=" + $scope.clientID;
@@ -234,12 +235,35 @@ pantryApp.controller('searchController', function ($scope, $http){
 
 	};	
 	
-	$scope.deleteModal = function(){
-		$(".table tbody").on("click", "tr .btn-danger", function(e){
-			$('.dialog-confirm').attr('id', $(this).attr('id'));
-			$('.dialog-confirm').dialog('open');
+	$scope.deleteModal = function(id){
+		$('.ui-widget-overlay').css('display','block');
+		$('#myModal').addClass('in');
+		
+		$(".delete").on("click", function(e){
+			$('#myModal').removeClass('in');
+			$('.ui-widget-overlay').css('display','none');
+			
+			deleteClient(id);
 		});
+		
+		$(".close").on("click", function(e){
+			$('#myModal').removeClass('in');
+			$('.ui-widget-overlay').css('display','none');
+		});
+		
+		$(".cancel").on("click", function(e){
+			$('#myModal').removeClass('in');
+			$('.ui-widget-overlay').css('display','none');
+			
+		});
+		
+		$(".ui-widget-overlay").on("click", function(e){
+			$('#myModal').removeClass('in');
+			$('.ui-widget-overlay').css('display','none');
+		});
+		
 	};
+	
 	
 	var deleteClient = function (id) {
 		

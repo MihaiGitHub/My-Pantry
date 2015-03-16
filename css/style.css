@@ -99,7 +99,7 @@ textarea {
 */
 
 .subnavbar {
-    	margin-bottom: 2.5em;
+    	margin-bottom: 15px;
     }
     
 .subnavbar-inner {
@@ -288,7 +288,7 @@ textarea {
 	position: relative;
 	clear: both;
 	width: auto;
-	margin-bottom: 2em;
+	margin-bottom: 8px;
 	overflow: hidden;
 }
 	
@@ -1188,4 +1188,29 @@ table tr td {
 }
 .alignRight {
 	text-align:right;
+}
+/* error */
+.alertt-danger {
+color: #a94442;
+background-color: #f2dede;
+border-color: #ebccd1;
+}
+.alertt {
+	margin-left:30px;
+	margin-bottom:15px;
+padding: 15px;
+border: 1px solid #ebccd1;
+border-radius: 4px;
+}
+b, strong {
+font-weight: 700;
+}
+.alertt-danger .alertt-link {
+color: #843534;
+}
+.alertt .alertt-link {
+font-weight: 700;
+}
+.sort {
+	cursor:pointer;	
 }

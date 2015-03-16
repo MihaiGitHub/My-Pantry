@@ -82,7 +82,24 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 	.error(function(data, status) {
 		$scope.data = data || "Request failed";
 		$scope.status = status;			
-	});	
+	});
+	
+	$scope.sort = {
+            column: '',
+            descending: false
+    };
+						
+	$scope.changeSorting = function(column) { console.log('column ',column)
+
+            var sort = $scope.sort;
+ 
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
+    };
 
 	$scope.update = function(){ 
 		

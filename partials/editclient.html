@@ -299,11 +299,7 @@
 		  <table class="table table-striped table-bordered">
 			<thead>
 			  <tr>
-				<th>
-					<a href="" ng-click="orderByField='dateOfVisit'; reverseSort = !reverseSort">
-					  Date of Visit <span ng-show="orderByField == 'dateOfVisit'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-					</a>
-				</th>
+				<th class="sort" ng-click="changeSorting('dateOfVisit')">Date of visit</th>
 				<th>Program</th>
 				<th>Volunteer</th>
 				<th>Lbs</th>
@@ -311,7 +307,7 @@
 			  </tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="visit in visits | orderBy:orderByField:reverseSort" ng-show="client[0].dateOfVisit">
+			   <tr ng-repeat="visit in visits|orderBy:sort.column:sort.descending" ng-show="client[0].dateOfVisit">
 				<td>{{ visit.dateOfVisit }}</td>
 				<td>{{ visit.program }}</td>
 				<td>{{ visit.volunteer }}</td>

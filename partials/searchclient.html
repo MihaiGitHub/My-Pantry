@@ -139,11 +139,7 @@ function clicked(value){
 }
 </script>
 	  <!-------------------------------->
-<style>
-th:hover {
-	cursor:pointer;	
-}
-</style>
+
 <div class="widget widget-table action-table">
 	<div class="widget-header"> <i class="icon-th-list"></i>
 	  <h3>Clients</h3>
@@ -154,19 +150,18 @@ th:hover {
 	  <table class="table table-striped table-bordered">
 		<thead>
 		  <tr>
-			<th id="id" ng-click="changeSorting('id')">Client ID#</th>
-			<th id="fnameCol" ng-click="changeSorting('fname')">First Name</th>
-			<th id="lnameCol" ng-click="changeSorting('lname')">Last Name</th>
-			<th id="address" ng-click="changeSorting('address')">Address</th>
-			<th id="phone" ng-click="changeSorting('phone')">Phone</th>
-			<th id="inHouse" ng-click="changeSorting('inhouse')"># in House</th>
-			<th id="email" ng-click="changeSorting('email')">Email</th>
+			<th id="id" class="sort" ng-click="changeSorting('id')">Client ID#</th>
+			<th id="fnameCol" class="sort" ng-click="changeSorting('fname')">First Name</th>
+			<th id="lnameCol" class="sort" ng-click="changeSorting('lname')">Last Name</th>
+			<th id="address" class="sort" ng-click="changeSorting('address')">Address</th>
+			<th id="phone" class="sort" ng-click="changeSorting('phone')">Phone</th>
+			<th id="inHouse" class="sort" ng-click="changeSorting('inhouse')"># in House</th>
+			<th id="email" class="sort" ng-click="changeSorting('email')">Email</th>
 			<th class="td-actions"> </th>
 		  </tr>
 		</thead>
 		<tbody>
-		<!--  <tr ng-repeat="client in clients" ng-show="clients.length"> -->
-        <tr ng-repeat="client in clients|orderBy:sort.column:sort.descending">
+          <tr ng-repeat="client in clients|orderBy:sort.column:sort.descending">
 			<td>{{ client.id }}</td>
 			<td>{{ client.fname }}</td>
 			<td>{{ client.lname }}</td>

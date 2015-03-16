@@ -77,7 +77,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 			
-			console.log($scope)
+			console.log($scope.visits)
 		}
 	})
 	

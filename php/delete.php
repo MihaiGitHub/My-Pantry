@@ -9,7 +9,7 @@ try{
 	if($_POST['visits'] == 'delete'){
 		$stmt = $objDb->prepare('DELETE FROM visits WHERE id = :id');
 		if($stmt->execute(array('id' => $_POST['visitid']))){
-			$stmt = $objDb->prepare('SELECT date_of_visit as dateOfVisit, program, volunteer, weight FROM visits WHERE client_id = :id');
+			$stmt = $objDb->prepare('SELECT id as vid, date_of_visit as dateOfVisit, program, volunteer, weight FROM visits WHERE client_id = :id');
 			$stmt->execute(array('id' => $_POST['id']));
 			
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);

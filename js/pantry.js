@@ -76,8 +76,6 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.visits = data.client;
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
-			
-			console.log($scope.visits)
 		}
 	})
 	
@@ -199,6 +197,23 @@ pantryApp.controller('searchController', function ($scope, $http){
     $scope.form = {idType : $scope.typeOptions[0].value, fnameType : $scope.typeOptions[0].value, lnameType : $scope.typeOptions[0].value, 
 					addressType : $scope.typeOptions[0].value, phoneType : $scope.typeOptions[0].value, emailType : $scope.typeOptions[0].value,
 					numInHouseType : $scope.typeOptions[0].value, commentsType : $scope.typeOptions[0].value};
+					
+	$scope.sort = {
+            column: '',
+            descending: false
+    };
+						
+	$scope.changeSorting = function(column) { console.log('column ',column)
+
+            var sort = $scope.sort;
+ 
+            if (sort.column == column) {
+                sort.descending = !sort.descending;
+            } else {
+                sort.column = column;
+                sort.descending = false;
+            }
+    };
 	
 	$scope.search = function(){ 
 		var thisData = "id=" + $scope.clientID;
@@ -226,7 +241,7 @@ pantryApp.controller('searchController', function ($scope, $http){
 		})
 		
 		.success(function(data, status) {
-			if(data.clients){ 
+			if(data.clients){
 				$scope.clients = data.clients;	
 			}
 		})

@@ -15,11 +15,11 @@ pantryApp.config(['$routeProvider', function($routeProvider) {
 
 pantryApp.run(function($rootScope, $location, loginService){
 	var routespermission=['/search', '/add', '/edit', '/vol'];  //route that require login
-	
+	// 777
 	$rootScope.$on('$routeChangeStart', function(){
 		if( routespermission.indexOf($location.path()) !=-1)
 		{	
-			var connected=loginService.islogged();
+			var connected = loginService.islogged();
 			connected.then(function(msg){
 				if(!msg.data) $location.path('/login');
 			});
@@ -508,27 +508,42 @@ pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $locat
 pantryApp.factory('loginService',function($rootScope, $http, $location, sessionService){
 	return{
 		login:function(data,scope){
-			var $promise=$http.post('php/user.php',data); //send data to user.php
+			var $promise = $http.post('php/user.php',data); //send data to user.php
 			$promise.then(function(msg){
-				var uid=msg.data;
+				
+				console.log('msg ',msg)
+				
+				console.log('msg.data.role',msg.data.role)
+				
+				var role = msg.data.role;
+				
+				var uid = msg.data.uid;
+				
 				if(uid){
 					$rootScope.authenticated = true;
-					sessionService.set('uid',uid);
 					
-					$location.path('/search');
+					sessionService.set('uid',uid);
+					sessionService.set('role',role);
+					
+					console.log('sessionService role ',sessionService.get('role'))
+					
+					console.log('sessionStorage ',sessionStorage)
+					
+				//	$location.path('/search');
 				}	       
 				else  {
-					scope.msgtxt='incorrect information';
+					scope.msgtxt = 'incorrect information';
 					$location.path('/login');
 				}				   
 			});
 		},
+		// make isAdmin() ???
 		logout:function(){
 			sessionService.destroy('uid');
 			$location.path('/login');
 		},
 		islogged:function(){
-			var $checkSessionServer=$http.post('php/check_session.php');
+			var $checkSessionServer = $http.post('php/check_session.php');
 			return $checkSessionServer;
 			/*
 			if(sessionService.get('user')) return true;

@@ -94,7 +94,7 @@
 						<span>Reports</span>
 					</a>    				
 				</li>
-				<li ng-class="navClass('vol')">
+				<li ng-class="navClass('vol')" ng-show="!islogged('admin')">
 					<a href="#/vol">
 						<i class="icon-group"></i>
 						<span>Volunteers</span>

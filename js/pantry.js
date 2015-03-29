@@ -492,7 +492,7 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 
 });
 
-pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
+pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) { console.log('777',sessionStorage);
 
     $scope.navClass = function (page) {
         var currentRoute = $location.path().substring(1) || 'search';
@@ -501,6 +501,10 @@ pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $locat
 
 	$scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
+    };
+	
+	$scope.isAdmin = function () { 
+        console.log(sessionStorage);
     };
 	
 }]);
@@ -529,7 +533,7 @@ pantryApp.factory('loginService',function($rootScope, $http, $location, sessionS
 					
 					console.log('sessionStorage ',sessionStorage)
 					
-				//	$location.path('/search');
+					$location.path('/search');
 				}	       
 				else  {
 					scope.msgtxt = 'incorrect information';
@@ -537,14 +541,25 @@ pantryApp.factory('loginService',function($rootScope, $http, $location, sessionS
 				}				   
 			});
 		},
-		// make isAdmin() ???
+	/*	isAdmin:function(){
+			if(sessionStorage.get('role') == 'admin')
+				return $checkSessionServer;
+			
+			if(sessionService.get('user')) return true;
+			else return false;
+			
+		},*/
 		logout:function(){
 			sessionService.destroy('uid');
 			$location.path('/login');
 		},
-		islogged:function(){
-			var $checkSessionServer = $http.post('php/check_session.php');
-			return $checkSessionServer;
+		islogged:function(role){
+			console.log('inside islogged ',sessionStorage);
+			return sessionStorage.get('role');
+			
+			// old
+	//		var $checkSessionServer = $http.post('php/check_session.php');
+	//		return $checkSessionServer;
 			/*
 			if(sessionService.get('user')) return true;
 			else return false;

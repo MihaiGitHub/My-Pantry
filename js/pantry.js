@@ -14,15 +14,24 @@ pantryApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 pantryApp.run(function($rootScope, $location, loginService){
-	var routespermission=['/search', '/add', '/edit', '/vol'];  //route that require login
-	// 777
+	var routespermission = ['/search', '/add', '/edit', '/reports', '/vol'];  //route that require login
+	var adminroutes = ['/reports', '/vol'];
 	$rootScope.$on('$routeChangeStart', function(){
-		if( routespermission.indexOf($location.path()) !=-1)
-		{	
+		
+		if( routespermission.indexOf($location.path()) != -1){ // if you can find the current route in the routespermission array	
+		
+			// if they are on an admin route and are not an admin then redirect to search
+			if(adminroutes.indexOf($location.path()) != -1 && sessionStorage['role'] != 'admin'){
+				$location.path('/search');
+			} 
+			
+			// if they are on any other route just check if they are logged in
 			var connected = loginService.islogged();
+			
 			connected.then(function(msg){
 				if(!msg.data) $location.path('/login');
 			});
+			
 		}
 	});
 });
@@ -492,7 +501,7 @@ pantryApp.controller('volunteerController', function ($scope, $http){
 
 });
 
-pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) { console.log('777',sessionStorage);
+pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
 
     $scope.navClass = function (page) {
         var currentRoute = $location.path().substring(1) || 'search';
@@ -503,10 +512,10 @@ pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $locat
         return viewLocation === $location.path();
     };
 	
-	$scope.isAdmin = function () { 
-        console.log(sessionStorage);
-    };
-	
+	$scope.userRole = function(role){
+		return role === sessionStorage['role'];
+	};
+
 }]);
 /***********************SERVICES***************/
 pantryApp.factory('loginService',function($rootScope, $http, $location, sessionService){
@@ -515,12 +524,7 @@ pantryApp.factory('loginService',function($rootScope, $http, $location, sessionS
 			var $promise = $http.post('php/user.php',data); //send data to user.php
 			$promise.then(function(msg){
 				
-				console.log('msg ',msg)
-				
-				console.log('msg.data.role',msg.data.role)
-				
-				var role = msg.data.role;
-				
+				var role = msg.data.role;				
 				var uid = msg.data.uid;
 				
 				if(uid){
@@ -528,11 +532,7 @@ pantryApp.factory('loginService',function($rootScope, $http, $location, sessionS
 					
 					sessionService.set('uid',uid);
 					sessionService.set('role',role);
-					
-					console.log('sessionService role ',sessionService.get('role'))
-					
-					console.log('sessionStorage ',sessionStorage)
-					
+										
 					$location.path('/search');
 				}	       
 				else  {
@@ -541,29 +541,15 @@ pantryApp.factory('loginService',function($rootScope, $http, $location, sessionS
 				}				   
 			});
 		},
-	/*	isAdmin:function(){
-			if(sessionStorage.get('role') == 'admin')
-				return $checkSessionServer;
-			
-			if(sessionService.get('user')) return true;
-			else return false;
-			
-		},*/
+		
 		logout:function(){
-			sessionService.destroy('uid');
+			sessionService.destroy('uid', 'role');
+			
 			$location.path('/login');
 		},
-		islogged:function(role){
-			console.log('inside islogged ',sessionStorage);
-			return sessionStorage.get('role');
-			
-			// old
-	//		var $checkSessionServer = $http.post('php/check_session.php');
-	//		return $checkSessionServer;
-			/*
-			if(sessionService.get('user')) return true;
-			else return false;
-			*/
+		islogged:function(){
+			var $checkSessionServer = $http.post('php/check_session.php');
+			return $checkSessionServer;
 		}
 	}
 
@@ -576,8 +562,9 @@ pantryApp.factory('sessionService', ['$http', function($http){
 		get:function(key){
 			return sessionStorage.getItem(key);
 		},
-		destroy:function(key){
+		destroy:function(key, role){
 			$http.post('php/destroy_session.php');
+			sessionStorage.removeItem(role);
 			return sessionStorage.removeItem(key);
 		}
 	};

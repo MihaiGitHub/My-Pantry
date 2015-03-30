@@ -88,13 +88,13 @@
 						<span>Add Client</span>
 					</a>	    				
 				</li>
-				<li ng-class="navClass('reports')">
+				<li ng-class="navClass('reports')" ng-show="userRole('admin')">
 					<a href="#/reports">
 						<i class="icon-list-alt"></i>
 						<span>Reports</span>
 					</a>    				
 				</li>
-				<li ng-class="navClass('vol')" ng-show="!islogged('admin')">
+				<li ng-class="navClass('vol')" ng-show="userRole('admin')">
 					<a href="#/vol">
 						<i class="icon-group"></i>
 						<span>Volunteers</span>

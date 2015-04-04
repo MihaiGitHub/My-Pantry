@@ -521,8 +521,32 @@ pantryApp.controller('navCtrl', ['$scope', '$location', function ($scope, $locat
 pantryApp.factory('loginService',function($rootScope, $http, $location, sessionService){
 	return{
 		login:function(data,scope){
-			var $promise = $http.post('php/user.php',data); //send data to user.php
+		//	data = JSON.stringify(data);
+			
+			
+			/*
+			//////////////////////////
+		$http({
+			method: 'POST',
+			url: 'php/user.php',
+			data: data,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {
+			console.log('eurkea ',data)
+		})
+		
+		.error(function(data, status) {
+			console.log('error');			
+		});	
+		*/
+			
+			var $promise = $http.post('php/user.php',data); //777send data to user.php
+			
 			$promise.then(function(msg){
+				console.log('promise ',msg);
+				
 				
 				var role = msg.data.role;				
 				var uid = msg.data.uid;
@@ -540,6 +564,7 @@ pantryApp.factory('loginService',function($rootScope, $http, $location, sessionS
 					$location.path('/login');
 				}				   
 			});
+			
 		},
 		
 		logout:function(){

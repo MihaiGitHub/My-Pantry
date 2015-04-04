@@ -1,69 +1,39 @@
 <?php
 try {
-//	session_start();
-	$user = file_get_contents('php://input');  //get user from 
-	$user = json_decode($user, true);
-	
+
+	$user = file_get_contents('php://input');
+	$user = json_decode($user);
+	$username = $user->mail;
+	$password = $user->pass;
+
 	include 'dbconnect.php';
-	
-	echo $user['mail'];
-	/*
+		
 	$stmt = $objDb->prepare("SELECT id, username, password, role FROM users WHERE username = :username");
-	if(!$stmt->execute(array('username' => $user['mail']))){
+	if(!$stmt->execute(array('username' => $username))){
 		throw new PDOException('The result returned no object');
 	}
-	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+	$stmt->setFetchMode(PDO::FETCH_ASSOC);	
 	
-	
-	
-	$row = $stmt->fetchAll();
-
-	
-	
-	
-	while($row = $stmt->fetchAll()){
-		echo 'inside';
-		
-		echo md5($user['pass']);
-		
-		if(md5($user['pass']) == $row['password']){
+	while($row = $stmt->fetch()){
+				
+		if(md5($password) == $row['password']){
+			session_start();
 			$_SESSION['id'] = $row['id'];
+			$_SESSION['role'] = $row['role'];
 			$_SESSION['auth'] = true;
 			$_SESSION['last_access'] = time();
+			$_SESSION['uid'] = uniqid('ang_');
 			break;
 		} else {
 			$_SESSION['auth'] = false;
 		}
 
 	}
-	
-	if($_SESSION['auth']){
 
-		$_SESSION['uid'] = uniqid('ang_');
-		$_SESSION['role'] = 'standard';
-		echo json_encode($_SESSION);
-	} else {
-		echo 'false';	
-	}
-	*/
-/**/	
-	
-	
-	
-	/*
-	
-	if($user->mail == 'demo' && $user->pass == 'demo'){ 
-		//session_start();
-		$_SESSION['uid'] = uniqid('ang_');
-		$_SESSION['role'] = 'standard';
-		echo json_encode($_SESSION);}
-	if($user->mail == 'admin' && $user->pass == 'admin'){ 
-		//session_start();
-		$_SESSION['uid'] = uniqid('ang_');
-		$_SESSION['role'] = 'admin';
+	if($_SESSION['auth']){
 		echo json_encode($_SESSION);
 	}
-	*/
+
 } catch(PDOException $e) {
 
 	echo json_encode(array(

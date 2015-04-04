@@ -172,7 +172,7 @@ function clicked(value){
 
 			<td class="td-actions">
 				<a ng-href="#/edit/{{client.id}}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a>
-				<a href="" class="btn btn-danger btn-small" ng-click="deleteModal(client.id)"><i class="btn-icon-only icon-remove"> </i></a>
+				<a href="" class="btn btn-danger btn-small" ng-click="deleteModal(client.id)" ng-show="userRole('admin')"><i class="btn-icon-only icon-remove"> </i></a>
 			</td>
 		  </tr>	
 		  <tr ng-show="!clients.length"><td colspan="8" class="centerText">No records found</td></tr>

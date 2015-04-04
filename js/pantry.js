@@ -348,7 +348,16 @@ pantryApp.controller('searchController', function ($scope, $http){
 pantryApp.controller('insertController', function ($scope, $http, $location){
 	var urlInsert = 'php/insert.php';	
 	var urlVolunteers = 'php/volunteers.php';
+	var urlSearch = 'php/search.php';
 	
+	$http.get(urlSearch).
+	  success(function(data, status, headers, config) { console.log('id ',data.id)
+		$scope.clientID = data.id;
+	  }).
+	  error(function(data, status, headers, config) {
+			$scope.data = data;
+	  });
+	  
 	$http.get(urlVolunteers).
 	  success(function(data, status, headers, config) {
 		$scope.volunteers = data.volunteers;

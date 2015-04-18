@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 try {
 	ini_set('max_execution_time', 5500);
 
@@ -30,9 +32,9 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->SetMargins(5, 7, 5, true);
+$pdf->SetHeaderMargin(5);
+$pdf->SetFooterMargin(5);
 
 // set auto page breaks
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
@@ -64,21 +66,20 @@ $pdf->AddPage('L');
 // set text shadow effect
 $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 	if($_POST['report'] == 'clientVisits'){
-$sql = "SELECT * FROM `clients` AS c, `visits` AS v WHERE c.id = v.client_id AND (date_of_visit BETWEEN :from AND :to)";
-//$sql = "SELECT * FROM `clients` AS c, `visits` AS v WHERE c.id = 1126241 AND c.id = v.client_id AND (date_of_visit BETWEEN '2010-1-14' AND '2015-1-14')";
+$sql = "SELECT v.date_of_visit AS date, c.id AS id, c.fname AS fname, c.lname AS lname, c.address AS address, c.phone AS phone, c.inhouse AS inhouse, c.email AS email, v.weight AS weight 
+		FROM `clients` AS c, `visits` AS v WHERE c.id = v.client_id AND (date_of_visit BETWEEN :from AND :to)";
 $stmt = $objDb->prepare($sql);
 $result = $stmt->execute(array('from' => $_POST['from'], 'to' => $_POST['to']));
-//$result = $stmt->execute();
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
 $weight = 0;
 // Set some content to print
-$html .= '<h1>Client Visits By Date Range</h1>';
+$html .= '<br/><h1>Client Visits By Date Range</h1>';
 
 $html .= '<table><tr><th>Date</th><th>ID</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th># In House</th><th>Email</th><th>Weight</th></tr>';
 while($row = $stmt->fetch()){
 	$weight = $weight + $row['weight'];
-	$html .= '<tr><td>'.$row['date_of_visit'].'</td><td>'.$row['id'].'</td><td>'.$row['fname'].'</td><td>'.$row['lname'].'</td><td>'.$row['address'].'</td><td>'.$row['phone'].'</td><td>'.$row['inhouse'].'</td><td>'.$row['email'].'</td><td>'.$row['weight'].'</td></tr>';
+	$html .= '<tr><td>'.$row['date'].'</td><td>'.$row['id'].'</td><td>'.$row['fname'].'</td><td>'.$row['lname'].'</td><td>'.$row['address'].'</td><td>'.$row['phone'].'</td><td>'.$row['inhouse'].'</td><td>'.$row['email'].'</td><td>'.$row['weight'].'</td></tr>';
 }
 
 $html .= '</table>
@@ -113,3 +114,6 @@ $pdf->Output('report.pdf', 'I');
 } catch(PDOException $e) {
 	print_r($e);
 }
+$content = ob_get_contents();
+ob_end_clean();
+print $content;

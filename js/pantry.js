@@ -111,75 +111,93 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
     };
 
 	$scope.update = function(){ 
-		
-		var thisData = id;
-		thisData += "&fname=" + $scope.client[0].fname;
-		thisData += "&lname=" + $scope.client[0].lname;
-		thisData += "&address=" + $scope.client[0].address;
-		thisData += "&city=" + $scope.client[0].city;
-		thisData += "&state=" + $scope.client[0].state;
-		thisData += "&postalCode=" + $scope.client[0].postalCode;
-		thisData += "&phone=" + $scope.client[0].phone;
-		thisData += "&email=" + $scope.client[0].email;
-		thisData += "&employed=" + $scope.client[0].employed;
-		thisData += "&lastDateWorked=" + $scope.client[0].lastDateWorked;
-		thisData += "&annualIncome=" + $scope.client[0].annualIncome;
-		thisData += "&incomeUpdated=" + $scope.client[0].incomeUpdated;
-		thisData += "&inHouse=" + $scope.client[0].inHouse;
-		thisData += "&howManyMales=" + $scope.client[0].howManyMales;
-		thisData += "&howManyFemales=" + $scope.client[0].howManyFemales;
-		thisData += "&ageGroups=" + $scope.client[0].ageGroups;
-		thisData += "&comments=" + $scope.client[0].comments;
-				
-		$http({
-			method: 'POST',
-			url: urlUpdate,
-			data: thisData,
-			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-		})
-		
-		.success(function(data, status) {
-			$location.path('/search');
-		})
-		
-		.error(function(data, status) {
-			$scope.data = data || "Request failed";
-			$scope.status = status;			
-		});	
+	
+			$.validate({
+			    validateOnBlur : true, // disable validation when input looses focus
+    			scrollToTopOnError : true, // Set this property to true if you have a long form
+				onError : function() {
+				  console.log('Validation failed');
+				},
+				onSuccess : function() { console.log('validation succeeded')
+						var thisData = id;
+						thisData += "&fname=" + $scope.client[0].fname;
+						thisData += "&lname=" + $scope.client[0].lname;
+						thisData += "&address=" + $scope.client[0].address;
+						thisData += "&city=" + $scope.client[0].city;
+						thisData += "&state=" + $scope.client[0].state;
+						thisData += "&postalCode=" + $scope.client[0].postalCode;
+						thisData += "&phone=" + $scope.client[0].phone;
+						thisData += "&email=" + $scope.client[0].email;
+						thisData += "&employed=" + $scope.client[0].employed;
+						thisData += "&lastDateWorked=" + $scope.client[0].lastDateWorked;
+						thisData += "&annualIncome=" + $scope.client[0].annualIncome;
+						thisData += "&incomeUpdated=" + $scope.client[0].incomeUpdated;
+						thisData += "&inHouse=" + $scope.client[0].inHouse;
+						thisData += "&howManyMales=" + $scope.client[0].howManyMales;
+						thisData += "&howManyFemales=" + $scope.client[0].howManyFemales;
+						thisData += "&ageGroups=" + $scope.client[0].ageGroups;
+						thisData += "&comments=" + $scope.client[0].comments;
+								
+						$http({
+							method: 'POST',
+							url: urlUpdate,
+							data: thisData,
+							headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+						})
+						
+						.success(function(data, status) {
+							$location.path('/search');
+						})
+						
+						.error(function(data, status) {
+							$scope.data = data || "Request failed";
+							$scope.status = status;			
+						});				
+				}
+		  });
 	
 	};
 	
 	$scope.addVisit = function(){ 
-		var thisData = id;
-		thisData += "&lname=" + $scope.client[0].lname;
-		thisData += "&fname=" + $scope.client[0].fname;
-		thisData += "&inHouse=" + $scope.client[0].inHouse;
-		thisData += "&phone=" + $scope.client[0].phone;
-		thisData += "&email=" + $scope.client[0].email;
-
-		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
-		thisData += "&program=" + $scope.program;
-		thisData += "&numBags=" + $scope.numBags;
-		thisData += "&weight=" + $scope.weight;
-		thisData += "&volunteer=" + $scope.volunteer.volunteer;
+	$.validate({
+			    validateOnBlur : true, // disable validation when input looses focus
+    			scrollToTopOnError : true, // Set this property to true if you have a long form
+				onError : function() {
+				  console.log('Validation failed');
+				},
+				onSuccess : function() { console.log('validation succeeded')
+								var thisData = id;
+								thisData += "&lname=" + $scope.client[0].lname;
+								thisData += "&fname=" + $scope.client[0].fname;
+								thisData += "&inHouse=" + $scope.client[0].inHouse;
+								thisData += "&phone=" + $scope.client[0].phone;
+								thisData += "&email=" + $scope.client[0].email;
 						
-		$http({
-			method: 'POST',
-			url: urlUpdate,
-			data: thisData,
-			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-		})
-		
-		.success(function(data, status) { 
-			if(data.client){
-				$scope.visits = data.client;
-			}			
-		})
-		
-		.error(function(data, status) {
-			$scope.data = data || "Request failed";
-			$scope.status = status;			
-		});	
+								thisData += "&dateOfVisit=" + $scope.dateOfVisit;
+								thisData += "&program=" + $scope.program;
+								thisData += "&numBags=" + $scope.numBags;
+								thisData += "&weight=" + $scope.weight;
+								thisData += "&volunteer=" + $scope.volunteer.volunteer;
+												
+								$http({
+									method: 'POST',
+									url: urlUpdate,
+									data: thisData,
+									headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+								})
+								
+								.success(function(data, status) { 
+									if(data.client){
+										$scope.visits = data.client;
+									}			
+								})
+								
+								.error(function(data, status) {
+									$scope.data = data || "Request failed";
+									$scope.status = status;			
+								});				
+				}
+		  });
 	
 	};	
 	
@@ -367,52 +385,62 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 	  });
 		
 	$scope.insert = function(){ 
-		var thisData = "id=" + $scope.clientID;
-		thisData += "&fname=" + $scope.fname;
-		thisData += "&lname=" + $scope.lname;
-		thisData += "&address=" + $scope.address;
-		thisData += "&city=" + $scope.city;
-		thisData += "&state=" + $scope.state;
-		thisData += "&postalCode=" + $scope.postalCode;
-		thisData += "&phone=" + $scope.phone;
-		thisData += "&email=" + $scope.email;
-		thisData += "&employed=" + $scope.employed;
-		thisData += "&lastDateWorked=" + $scope.lastDateWorked;
-		thisData += "&annualIncome=" + $scope.annualIncome;
-		thisData += "&incomeUpdated=" + $scope.incomeUpdated;
-		thisData += "&inHouse=" + $scope.inHouse;
-		thisData += "&howManyMales=" + $scope.howManyMales;
-		thisData += "&howManyFemales=" + $scope.howManyFemales;
-		thisData += "&ageGroups=" + $scope.ageGroups;
-		thisData += "&comments=" + $scope.comments;
-		
-		thisData += "&dateOfVisit=" + $scope.dateOfVisit;
-		thisData += "&program=" + $scope.program;
-		thisData += "&numBags=" + $scope.numBags;
-		thisData += "&weight=" + $scope.weight;
-		thisData += "&volunteer=" + $scope.volunteer.volunteer;
-				
-		$http({
-			method: 'POST',
-			url: urlInsert,
-			data: thisData,
-			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-		})
-		
-		.success(function(data, status) {
-			console.log(data, status);
-			if(data.error){
-				$('.alertt').css('display','block');
-				window.scrollTo(0, 0);
-			} else{
-				$location.path('/search');
-			}
-		})
-		
-		.error(function(data, status) {
-			$scope.data = data || "Request failed";
-			$scope.status = status;			
-		});	
+
+		  $.validate({
+			    validateOnBlur : true, // disable validation when input looses focus
+    			scrollToTopOnError : true, // Set this property to true if you have a long form
+				onError : function() {
+				  console.log('Validation failed');
+				},
+				onSuccess : function() { console.log('validation succeeded')
+					var thisData = "id=" + $scope.clientID;
+					thisData += "&fname=" + $scope.fname;
+					thisData += "&lname=" + $scope.lname;
+					thisData += "&address=" + $scope.address;
+					thisData += "&city=" + $scope.city;
+					thisData += "&state=" + $scope.state;
+					thisData += "&postalCode=" + $scope.postalCode;
+					thisData += "&phone=" + $scope.phone;
+					thisData += "&email=" + $scope.email;
+					thisData += "&employed=" + $scope.employed;
+					thisData += "&lastDateWorked=" + $scope.lastDateWorked;
+					thisData += "&annualIncome=" + $scope.annualIncome;
+					thisData += "&incomeUpdated=" + $scope.incomeUpdated;
+					thisData += "&inHouse=" + $scope.inHouse;
+					thisData += "&howManyMales=" + $scope.howManyMales;
+					thisData += "&howManyFemales=" + $scope.howManyFemales;
+					thisData += "&ageGroups=" + $scope.ageGroups;
+					thisData += "&comments=" + $scope.comments;
+					
+					thisData += "&dateOfVisit=" + $scope.dateOfVisit;
+					thisData += "&program=" + $scope.program;
+					thisData += "&numBags=" + $scope.numBags;
+					thisData += "&weight=" + $scope.weight;
+					thisData += "&volunteer=" + $scope.volunteer.volunteer;
+							
+					$http({
+						method: 'POST',
+						url: urlInsert,
+						data: thisData,
+						headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+					})
+					
+					.success(function(data, status) {
+						console.log(data, status);
+						if(data.error){
+							$('.alertt').css('display','block');
+							window.scrollTo(0, 0);
+						} else{
+							$location.path('/search');
+						}
+					})
+					
+					.error(function(data, status) {
+						$scope.data = data || "Request failed";
+						$scope.status = status;			
+					});					
+				}
+		  });  
 
 	};
 });

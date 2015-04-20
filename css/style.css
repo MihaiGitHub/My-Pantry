@@ -1191,26 +1191,55 @@ table tr td {
 }
 /* error */
 .alertt-danger {
-color: #a94442;
-background-color: #f2dede;
-border-color: #ebccd1;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
 }
 .alertt {
 	margin-left:30px;
 	margin-bottom:15px;
-padding: 15px;
-border: 1px solid #ebccd1;
-border-radius: 4px;
+	padding: 15px;
+	border: 1px solid #ebccd1;
+	border-radius: 4px;
 }
 b, strong {
-font-weight: 700;
+	font-weight: 700;
 }
 .alertt-danger .alertt-link {
-color: #843534;
+	color: #843534;
 }
 .alertt .alertt-link {
-font-weight: 700;
+	font-weight: 700;
 }
 .sort {
 	cursor:pointer;	
+}
+/* Form validator */
+.help-block {
+    display: inline;
+    padding-left: 6px;
+    font-size: 85%;
+}
+span.form-error.help-block {
+    display: block;
+    color: red;
+    margin-top: 6px;
+    padding-left: 0;
+}
+div.form-error {
+    padding: 6px 12px;
+    line-height: 180%;
+    background: #ffe5ed;
+    border-radius: 4px;
+    margin-bottom: 22px;
+    color: darkred;
+}
+input.valid {
+    background: url(../img/icon-ok.png) no-repeat right center #e3ffe5;
+    color: #002f00;
+    border-color: #96b796 !important;
+}
+input.error {
+    background: url(../img/icon-fail.png) no-repeat right center #ffebef;
+    color: #480000;
 }

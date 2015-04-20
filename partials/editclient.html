@@ -15,14 +15,14 @@
 					<div class="control-group">											
 						<label class="control-label" for="firstname">First Name</label>
 						<div class="controls">
-							<input type="text" class="span4" id="firstname" ng-model="client[0].fname">
+							<input type="text" class="span4" id="firstname" ng-model="client[0].fname"  data-validation="custom" data-validation-regexp="[a-zA-Z]" data-validation-error-msg="The first name should contain only letters">
 						</div> <!-- /controls -->					
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
 						<label class="control-label" for="lastname">Last Name</label>
 						<div class="controls">
-							<input type="text" class="span4" id="lastname" ng-model="client[0].lname">
+							<input type="text" class="span4" id="lastname" ng-model="client[0].lname" data-validation="custom" data-validation-regexp="[a-zA-Z]" data-validation-error-msg="The last name should contain only letters">
 						</div> <!-- /controls -->
 					</div> <!-- /control-group -->
 					
@@ -237,34 +237,22 @@
 					<div class="control-group">											
 						<label class="control-label" for="dateOfVisit">Date of Visit</label>
 						<div class="controls">
-							<input type="text" maxlength="0" class="span4" id="dateOfVisit" ng-model="dateOfVisit">
+							<input type="text" maxlength="0" class="span4" id="dateOfVisit" ng-model="dateOfVisit" data-validation="date">
 						</div> <!-- /controls -->
 					</div> <!-- /control-group -->
-					<!--
-					<div class="control-group">											
-						<label class="control-label" for="numBags">Number of bags</label>
-						<div class="controls">
-							<select id="numBags" class="span4" ng-model="numBags">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</div>
-					</div>  /control-group -->
 					
 					<div class="control-group relative">											
 						<label class="control-label" for="weight">Weight (lbs)</label>
 						<div class="controls">
-							<input type="text" placeholder="pounds" class="span4" id="weight" ng-model="weight">
+							<input type="text" placeholder="pounds" class="span4" id="weight" ng-model="weight" data-validation="number">
 						</div> <!-- /controls -->		
 					</div> <!-- /control-group -->
 					
 					<div class="control-group">											
 						<label class="control-label" for="program">Program</label>
 						<div class="controls">
-							<select id="program" class="span4" ng-model="program">
+							<select id="program" class="span4" ng-model="program" data-validation="required" data-validation-error-msg="You did not pick a program">
+                            	<option></option>
 								<option value="2 Food Box/Hygiene/Fruit AND OR Vegetables">2 Food Box/Hygiene/Fruit AND OR Vegetables</option>
 								<option value="1 Food Box only">1 Food Box only</option>
 								<option value="7 Thanksgiving Food Box">7 Thanksgiving Food Box</option>
@@ -275,7 +263,7 @@
 					<div class="control-group">											
 						<label class="control-label" for="volunteer">Volunteer</label>
 						<div class="controls">
-							<select id="volunteer" class="span4" ng-model="volunteer" ng-options="v.volunteer for v in volunteers track by v.volunteer"></select>
+							<select id="volunteer" class="span4" ng-model="volunteer" ng-options="v.volunteer for v in volunteers track by v.volunteer" data-validation="required" data-validation-error-msg="You did not pick a volunteer"><option></option></select>
 						</div> <!-- /controls -->
 					</div> <!-- /control-group -->
 					
@@ -350,7 +338,7 @@
 	$( "#incomeUpdated" ).datepicker({
       changeMonth: true,
       changeYear: true,
-	  dateFormat: "yy-m-d"
+	  dateFormat: "yy-mm-dd"
     });
   });
 </script>

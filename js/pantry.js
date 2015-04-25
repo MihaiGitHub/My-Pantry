@@ -85,6 +85,8 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.visits = data.client;
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
+			
+			console.log($scope.visits)
 		}
 	})
 	
@@ -158,46 +160,63 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 	
 	};
 	
-	$scope.addVisit = function(){ 
-	$.validate({
-			    validateOnBlur : true, // disable validation when input looses focus
-    			scrollToTopOnError : true, // Set this property to true if you have a long form
-				onError : function() {
-				  console.log('Validation failed');
-				},
-				onSuccess : function() { console.log('validation succeeded')
-								var thisData = id;
-								thisData += "&lname=" + $scope.client[0].lname;
-								thisData += "&fname=" + $scope.client[0].fname;
-								thisData += "&inHouse=" + $scope.client[0].inHouse;
-								thisData += "&phone=" + $scope.client[0].phone;
-								thisData += "&email=" + $scope.client[0].email;
-						
-								thisData += "&dateOfVisit=" + $scope.dateOfVisit;
-								thisData += "&program=" + $scope.program;
-								thisData += "&numBags=" + $scope.numBags;
-								thisData += "&weight=" + $scope.weight;
-								thisData += "&volunteer=" + $scope.volunteer.volunteer;
-												
-								$http({
-									method: 'POST',
-									url: urlUpdate,
-									data: thisData,
-									headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-								})
-								
-								.success(function(data, status) { 
-									if(data.client){
-										$scope.visits = data.client;
-									}			
-								})
-								
-								.error(function(data, status) {
-									$scope.data = data || "Request failed";
-									$scope.status = status;			
-								});				
-				}
-		  });
+	$scope.addVisit = function(){
+		var visit = $scope.dateOfVisit;
+		var visits = $scope.visits;
+		var duplicate = false;
+
+		for(var i = 0; i < visits.length; i++){
+			if(visit == visits[i].dateOfVisit){
+				duplicate = true;
+				break;
+			}
+		}
+		
+		if(duplicate){
+			$('.alertt').show();
+			setTimeout(function(){ $('.alertt').hide(); }, 5000);
+			return false;
+		} else {
+			$.validate({
+					validateOnBlur : true, // disable validation when input looses focus
+					scrollToTopOnError : false, // Set this property to true if you have a long form
+					onError : function() {
+					  console.log('Validation failed');
+					},
+					onSuccess : function() { console.log('validation succeeded')
+									var thisData = id;
+									thisData += "&lname=" + $scope.client[0].lname;
+									thisData += "&fname=" + $scope.client[0].fname;
+									thisData += "&inHouse=" + $scope.client[0].inHouse;
+									thisData += "&phone=" + $scope.client[0].phone;
+									thisData += "&email=" + $scope.client[0].email;
+							
+									thisData += "&dateOfVisit=" + $scope.dateOfVisit;
+									thisData += "&program=" + $scope.program;
+									thisData += "&numBags=" + $scope.numBags;
+									thisData += "&weight=" + $scope.weight;
+									thisData += "&volunteer=" + $scope.volunteer.volunteer;
+													
+									$http({
+										method: 'POST',
+										url: urlUpdate,
+										data: thisData,
+										headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+									})
+									
+									.success(function(data, status) { 
+										if(data.client){
+											$scope.visits = data.client;
+										}			
+									})
+									
+									.error(function(data, status) {
+										$scope.data = data || "Request failed";
+										$scope.status = status;			
+									});				
+					}
+			  });
+		}
 	
 	};	
 	
@@ -216,8 +235,6 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		
 		.success(function(data, status) {
 			$scope.visits = data.visits;
-			
-			console.log($scope.visits)
 		})
 		
 		.error(function(data, status) {
@@ -369,7 +386,7 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 	var urlSearch = 'php/search.php';
 	
 	$http.get(urlSearch).
-	  success(function(data, status, headers, config) { console.log('id ',data.id)
+	  success(function(data, status, headers, config) {
 		$scope.clientID = data.id;
 	  }).
 	  error(function(data, status, headers, config) {

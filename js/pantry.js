@@ -402,14 +402,14 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 	  });
 		
 	$scope.insert = function(){ 
-
 		  $.validate({
 			    validateOnBlur : true, // disable validation when input looses focus
     			scrollToTopOnError : true, // Set this property to true if you have a long form
 				onError : function() {
 				  console.log('Validation failed');
 				},
-				onSuccess : function() { console.log('validation succeeded')
+				onSuccess : function() {
+				
 					var thisData = "id=" + $scope.clientID;
 					thisData += "&fname=" + $scope.fname;
 					thisData += "&lname=" + $scope.lname;
@@ -442,8 +442,7 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 						headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
 					})
 					
-					.success(function(data, status) {
-						console.log(data, status);
+					.success(function(data, status) { console.log(data)
 						if(data.error){
 							$('.alertt').css('display','block');
 							window.scrollTo(0, 0);
@@ -455,10 +454,11 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 					.error(function(data, status) {
 						$scope.data = data || "Request failed";
 						$scope.status = status;			
-					});					
+					});		
+			
 				}
 		  });  
-
+		 
 	};
 });
 

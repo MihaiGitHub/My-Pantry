@@ -81,8 +81,9 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			$scope.orderByField = 'dateOfVisit';
 			$scope.reverseSort = true;
 			
-			$scope.client = data.client;	
-			$scope.visits = data.client;
+			$scope.client = data.client;
+			var visits = data.client;
+			$scope.visits = visits.sort(compare);
 			$scope.volunteers = data.volunteers;
 			$scope.client[0].ageGroups = $scope.client[0].ageGroups.split(',');
 			
@@ -208,7 +209,11 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 								
 								.success(function(data, status) { 
 									if(data.client){
-										$scope.visits = data.client;
+										
+										var visits = data.client;	
+										visits.sort(compare);
+										
+										$scope.visits = visits;
 									}			
 								})
 								
@@ -250,6 +255,14 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 		});	
 	};
 
+	function compare(a,b) {
+	  if (a.dateOfVisit > b.dateOfVisit)  
+		 return -1;
+	  if (a.dateOfVisit < b.dateOfVisit)
+		return 1;
+		
+	  return 0;
+	}
 
 });
 

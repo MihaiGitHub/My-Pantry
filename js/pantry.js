@@ -172,50 +172,57 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			}
 		}
 		
-		if(duplicate){
-			$('.alertt').show();
-			setTimeout(function(){ $('.alertt').hide(); }, 5000);
+		if(duplicate){ console.log('duplicate')
+			$('.date').show();
+			setTimeout(function(){ $('.date').hide(); }, 10000);
 			return false;
-		} else {
-			$.validate({
-					validateOnBlur : true, // disable validation when input looses focus
-					scrollToTopOnError : false, // Set this property to true if you have a long form
-					onError : function() {
-					  console.log('Validation failed');
-					},
-					onSuccess : function() { console.log('validation succeeded')
-									var thisData = id;
-									thisData += "&lname=" + $scope.client[0].lname;
-									thisData += "&fname=" + $scope.client[0].fname;
-									thisData += "&inHouse=" + $scope.client[0].inHouse;
-									thisData += "&phone=" + $scope.client[0].phone;
-									thisData += "&email=" + $scope.client[0].email;
-							
-									thisData += "&dateOfVisit=" + $scope.dateOfVisit;
-									thisData += "&program=" + $scope.program;
-									thisData += "&numBags=" + $scope.numBags;
-									thisData += "&weight=" + $scope.weight;
-									thisData += "&volunteer=" + $scope.volunteer.volunteer;
-													
-									$http({
-										method: 'POST',
-										url: urlUpdate,
-										data: thisData,
-										headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
-									})
-									
-									.success(function(data, status) { 
-										if(data.client){
-											$scope.visits = data.client;
-										}			
-									})
-									
-									.error(function(data, status) {
-										$scope.data = data || "Request failed";
-										$scope.status = status;			
-									});				
+		} else { console.log('no duplicate')
+					
+					var dateOfVisit = $('#dateOfVisit').val();
+					var weight = $('#weight').val();
+					var program = $('#program').val();
+					var volunteer = $('#volunteer').val();
+					
+					if(dateOfVisit && weight && program && volunteer){ console.log('success')
+		
+		
+								var thisData = id;
+								thisData += "&lname=" + $scope.client[0].lname;
+								thisData += "&fname=" + $scope.client[0].fname;
+								thisData += "&inHouse=" + $scope.client[0].inHouse;
+								thisData += "&phone=" + $scope.client[0].phone;
+								thisData += "&email=" + $scope.client[0].email;
+						
+								thisData += "&dateOfVisit=" + $scope.dateOfVisit;
+								thisData += "&program=" + $scope.program;
+								thisData += "&numBags=" + $scope.numBags;
+								thisData += "&weight=" + $scope.weight;
+								thisData += "&volunteer=" + $scope.volunteer.volunteer;
+												
+								$http({
+									method: 'POST',
+									url: urlUpdate,
+									data: thisData,
+									headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+								})
+								
+								.success(function(data, status) { 
+									if(data.client){
+										$scope.visits = data.client;
+									}			
+								})
+								
+								.error(function(data, status) {
+									$scope.data = data || "Request failed";
+									$scope.status = status;			
+								});	
+								
+								
+					} else {
+							$('.fields').show();
+							setTimeout(function(){ $('.fields').hide(); }, 10000);
+							return false;
 					}
-			  });
 		}
 	
 	};	

@@ -1,5 +1,8 @@
-<div class="alertt alertt-danger" style="display:none;">
+<div class="alertt alertt-danger date" style="display:none;">
       <strong>Warning!</strong> This date already exists.
+</div>
+<div class="alertt alertt-danger fields" style="display:none;">
+      <strong>Warning!</strong> Not all fields for the visit have been completed.
 </div>
 <div class="span6">
 <div class="widget widget-nopad" ng-controller="editController">
@@ -286,7 +289,7 @@
 					<br />
 					
 					<div class="form-actions">
-						<button type="submit" class="btn btn-primary" ng-click="addVisit()" id="button">Save</button> 
+						<button type="button" class="btn btn-primary" ng-click="addVisit()" id="button">Save</button> 
 					</div> <!-- /form-actions -->
 				</fieldset>
 			</form>

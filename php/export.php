@@ -34,6 +34,9 @@ if($_POST['report'] == 'clientVisits'){
 	$result = $stmt->execute();
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 
+	$weight = 0;
+	$count = 0;
+	
 	while($row = $stmt->fetch())
 	{
 		$pdf->Cell(25, 10, $row['date'], 1);
@@ -55,7 +58,12 @@ if($_POST['report'] == 'clientVisits'){
 		}
 		
 		$pdf->setXY($x, $y);
+		$weight = $weight + $row['weight'];
+		$count++;
 	}
+	$pdf->Cell(55, 10, 'Total weight: '.$weight.' lbs', 1);
+	$pdf->Cell(50, 10, 'Total count: '.$count.' records', 1);
+
 } else {
 	$pdf->SetFillColor(170, 170, 170); //gray
 	$pdf->setFont("times","","11");

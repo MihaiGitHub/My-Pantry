@@ -184,7 +184,7 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 					var program = $('#program').val();
 					var volunteer = $('#volunteer').val();
 					
-					if(dateOfVisit && weight && program && volunteer){ console.log('success')
+					if(dateOfVisit && program && volunteer){ console.log('success')
 		
 		
 								var thisData = id;

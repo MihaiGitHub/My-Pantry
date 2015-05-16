@@ -121,25 +121,37 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 				onError : function() {
 				  console.log('Validation failed');
 				},
-				onSuccess : function() { console.log('validation succeeded')
+				onSuccess : function() {
+						var address = (typeof $scope.client[0].address === 'undefined') ? '' :  $scope.client[0].address;
+						var city = (typeof $scope.client[0].city === 'undefined') ? '' :  $scope.client[0].city;
+						var postalCode = (typeof $scope.client[0].postalCode === 'undefined') ? '' :  $scope.client[0].postalCode;
+						var phone = (typeof $scope.client[0].phone === 'undefined') ? '' :  $scope.client[0].phone;
+						var email = (typeof $scope.client[0].email === 'undefined') ? '' :  $scope.client[0].email;
+						var lastDateWorked = (typeof $scope.client[0].lastDateWorked === 'undefined') ? '' :  $scope.client[0].lastDateWorked;
+						var annualIncome = (typeof $scope.client[0].annualIncome === 'undefined') ? '' :  $scope.client[0].annualIncome;
+						var incomeUpdated = (typeof $scope.client[0].incomeUpdated === 'undefined') ? '' :  $scope.client[0].incomeUpdated;
+						var inHouse = (typeof $scope.client[0].inHouse === 'undefined') ? '' :  $scope.client[0].inHouse;
+						var ageGroups = (typeof $scope.client[0].ageGroups === 'undefined') ? '' :  $scope.client[0].ageGroups;
+						var comments = (typeof $scope.client[0].comments === 'undefined') ? '' :  $scope.client[0].comments;
+
 						var thisData = id;
 						thisData += "&fname=" + $scope.client[0].fname;
 						thisData += "&lname=" + $scope.client[0].lname;
-						thisData += "&address=" + $scope.client[0].address;
-						thisData += "&city=" + $scope.client[0].city;
+						thisData += "&address=" + address;
+						thisData += "&city=" + city;
 						thisData += "&state=" + $scope.client[0].state;
-						thisData += "&postalCode=" + $scope.client[0].postalCode;
-						thisData += "&phone=" + $scope.client[0].phone;
-						thisData += "&email=" + $scope.client[0].email;
+						thisData += "&postalCode=" + postalCode;
+						thisData += "&phone=" + phone;
+						thisData += "&email=" + email;
 						thisData += "&employed=" + $scope.client[0].employed;
-						thisData += "&lastDateWorked=" + $scope.client[0].lastDateWorked;
-						thisData += "&annualIncome=" + $scope.client[0].annualIncome;
-						thisData += "&incomeUpdated=" + $scope.client[0].incomeUpdated;
-						thisData += "&inHouse=" + $scope.client[0].inHouse;
+						thisData += "&lastDateWorked=" + lastDateWorked;
+						thisData += "&annualIncome=" + annualIncome;
+						thisData += "&incomeUpdated=" + incomeUpdated;
+						thisData += "&inHouse=" + inHouse;
 						thisData += "&howManyMales=" + $scope.client[0].howManyMales;
 						thisData += "&howManyFemales=" + $scope.client[0].howManyFemales;
-						thisData += "&ageGroups=" + $scope.client[0].ageGroups;
-						thisData += "&comments=" + $scope.client[0].comments;
+						thisData += "&ageGroups=" + ageGroups;
+						thisData += "&comments=" + comments;
 								
 						$http({
 							method: 'POST',
@@ -429,25 +441,37 @@ pantryApp.controller('insertController', function ($scope, $http, $location){
 				  console.log('Validation failed');
 				},
 				onSuccess : function() {
-				
+					
+					var address = (typeof $scope.address === 'undefined') ? '' :  $scope.address;
+					var city = (typeof $scope.city === 'undefined') ? '' :  $scope.city;
+					var postalCode = (typeof $scope.postalCode === 'undefined') ? '' :  $scope.postalCode;
+					var phone = (typeof $scope.phone === 'undefined') ? '' :  $scope.phone;
+					var email = (typeof $scope.email === 'undefined') ? '' :  $scope.email;
+					var lastDateWorked = (typeof $scope.lastDateWorked === 'undefined') ? '' :  $scope.lastDateWorked;
+					var annualIncome = (typeof $scope.annualIncome === 'undefined') ? '' :  $scope.annualIncome;
+					var incomeUpdated = (typeof $scope.incomeUpdated === 'undefined') ? '' :  $scope.incomeUpdated;
+					var inHouse = (typeof $scope.inHouse === 'undefined') ? '' :  $scope.inHouse;
+					var ageGroups = (typeof $scope.ageGroups === 'undefined') ? '' :  $scope.ageGroups;
+					var comments = (typeof $scope.comments === 'undefined') ? '' :  $scope.comments;
+
 					var thisData = "id=" + $scope.clientID;
 					thisData += "&fname=" + $scope.fname;
 					thisData += "&lname=" + $scope.lname;
-					thisData += "&address=" + $scope.address;
-					thisData += "&city=" + $scope.city;
+					thisData += "&address=" + address;
+					thisData += "&city=" + city;
 					thisData += "&state=" + $scope.state;
-					thisData += "&postalCode=" + $scope.postalCode;
-					thisData += "&phone=" + $scope.phone;
-					thisData += "&email=" + $scope.email;
+					thisData += "&postalCode=" + postalCode;
+					thisData += "&phone=" + phone;
+					thisData += "&email=" + email;
 					thisData += "&employed=" + $scope.employed;
-					thisData += "&lastDateWorked=" + $scope.lastDateWorked;
-					thisData += "&annualIncome=" + $scope.annualIncome;
-					thisData += "&incomeUpdated=" + $scope.incomeUpdated;
-					thisData += "&inHouse=" + $scope.inHouse;
+					thisData += "&lastDateWorked=" + lastDateWorked;
+					thisData += "&annualIncome=" + annualIncome;
+					thisData += "&incomeUpdated=" + incomeUpdated;
+					thisData += "&inHouse=" + inHouse;
 					thisData += "&howManyMales=" + $scope.howManyMales;
 					thisData += "&howManyFemales=" + $scope.howManyFemales;
-					thisData += "&ageGroups=" + $scope.ageGroups;
-					thisData += "&comments=" + $scope.comments;
+					thisData += "&ageGroups=" + ageGroups;
+					thisData += "&comments=" + comments;
 					
 					thisData += "&dateOfVisit=" + $scope.dateOfVisit;
 					thisData += "&program=" + $scope.program;

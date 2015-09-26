@@ -185,19 +185,18 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 			}
 		}
 		
-		if(duplicate){ console.log('duplicate')
+		if(duplicate){
 			$('.date').show();
 			setTimeout(function(){ $('.date').hide(); }, 10000);
 			return false;
-		} else { console.log('no duplicate')
+		} else {
 					
 					var dateOfVisit = $('#dateOfVisit').val();
 					var weight = $('#weight').val();
 					var program = $('#program').val();
 					var volunteer = $('#volunteer').val();
 					
-					if(dateOfVisit && program && volunteer){ console.log('success')
-		
+					if(dateOfVisit && program && volunteer){
 		
 								var thisData = id;
 								thisData += "&lname=" + $scope.client[0].lname;
@@ -280,8 +279,44 @@ pantryApp.controller('editController', function ($scope, $http, $routeParams, $l
 
 pantryApp.controller('searchController', function ($scope, $http){ 
 	var urlSearch = 'php/search.php';	
-	var urlDelete = 'php/delete.php';	
-	
+	var urlDelete = 'php/delete.php';
+
+	/////////////// For demo only
+		var thisData = "id=" + 231;
+		thisData += "&idType=contains";
+		thisData += "&fname=undefined";
+		thisData += "&fnameType=undefined";
+		thisData += "&lname=undefined";
+		thisData += "&lnameType=undefined";
+		thisData += "&address=undefined";
+		thisData += "&addressType=undefined";
+		thisData += "&phone=undefined";
+		thisData += "&phoneType=undefined";
+		thisData += "&email=undefined";
+		thisData += "&emailType=undefined";
+		thisData += "&numInHouse=undefined";
+		thisData += "&numInHouseType=undefined";
+		thisData += "&comments=undefined";
+		thisData += "&commentsType=undefined";
+
+		$http({
+			method: 'POST',
+			url: urlSearch,
+			data: thisData,
+			headers : {'Content-Type' : 'application/x-www-form-urlencoded'}
+		})
+		
+		.success(function(data, status) {
+			if(data.clients){
+				$scope.clients = data.clients;	
+			}
+		})
+		
+		.error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;			
+		});	
+		///////////////////////////////
 	$scope.typeOptions = [
 		{ name: 'Contains', value: 'contains' }, 
 		{ name: 'Starts With', value: 'startsWith' }
@@ -296,7 +331,7 @@ pantryApp.controller('searchController', function ($scope, $http){
             descending: false
     };
 						
-	$scope.changeSorting = function(column) { console.log('column ',column)
+	$scope.changeSorting = function(column) {
 
             var sort = $scope.sort;
  
